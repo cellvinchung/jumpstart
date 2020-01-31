@@ -6,12 +6,14 @@ def update_application
       <<~RUBY
         config.generators do |g|
           g.stylesheets false
+          g.helper false
         end
         config.time_zone = "Taipei"
         config.i18n.fallbacks = [I18n.default_locale]
         config.i18n.default_locale = :"zh-TW"
         config.i18n.available_locales = [:"zh-TW", :en]
         config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+        config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
       RUBY
     end
     uncomment_lines 'config/environments/production.rb', /require_master_key/

@@ -5,6 +5,7 @@ def setup_sidekiq
 
   after_bundle do
     application 'config.active_job.queue_adapter = :sidekiq'
+    custom_sidekiq
     custom_routes
     custom_yml
   end
@@ -19,6 +20,25 @@ def sidekiq_gems
     gem 'sidekiq-cron', '~> 1.1'
     gem 'sidekiq-unique-jobs'
     gem 'sidekiq-status'
+    gem 'activejob-traffic_control'
+  end
+end
+
+def custom_sidekiq
+  initializer 'sidekiq.rb' do
+    <<~RUBY
+      redis_conn = proc {
+        Redis.new host: Rails.application.credentials.dig(Rails.env.to_sym, :redis, :host), port: Rails.application.credentials.dig(Rails.env.to_sym, :redis, :port)
+      }
+      ActiveJob::TrafficControl.client = ConnectionPool.new(size: 5, timeout: 5, &redis_conn)
+      Sidekiq.configure_client do |config|
+        config.redis = ConnectionPool.new(size: 5, &redis_conn)
+      end
+
+      Sidekiq.configure_server do |config|
+        config.redis = ConnectionPool.new(size: 25, &redis_conn)
+      end
+    RUBY
   end
 end
 

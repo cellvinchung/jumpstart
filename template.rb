@@ -21,11 +21,6 @@ def add_common_gems
     gem 'rubocop-rails', require: false
     gem 'solargraph', require: false
     gem 'bumbler', require: false # 測試每個 gem 的加載速度
-    gem 'rack-mini-profiler', require: false
-    gem 'memory_profiler'
-    gem 'flamegraph'
-    gem 'stackprof'
-    gem 'fast_stack'
   end
 
   gem_group :production, :development do
@@ -63,6 +58,10 @@ def add_common_gems
 
   # do conditions based on the associations of your records
   gem 'activerecord_where_assoc', '~> 1.0'
+
+  gem 'rack-attack'
+
+  gem 'groupdate', require: false
 end
 
 def setup_activestorage
@@ -75,12 +74,16 @@ def finalize_setting
   after_bundle do
     rails_command 'db:migrate'
     setup_annotate
+
+    p "TODO: in console, run Lockbox.generate_key \n
+    add/move keys(omniautu, lockobx, rollbar, etc.) to credentials"
   end
 end
 
 jumpstart_folder = 'jumpstart/lib'
 require "../#{jumpstart_folder}/annotate"
 require "../#{jumpstart_folder}/application"
+require "../#{jumpstart_folder}/audited"
 require "../#{jumpstart_folder}/bullet"
 require "../#{jumpstart_folder}/capistrano"
 require "../#{jumpstart_folder}/cloudflare"
@@ -94,15 +97,21 @@ require "../#{jumpstart_folder}/gon"
 require "../#{jumpstart_folder}/i18n"
 require "../#{jumpstart_folder}/letter_opener"
 require "../#{jumpstart_folder}/loaf"
+require "../#{jumpstart_folder}/lockbox"
+require "../#{jumpstart_folder}/lograge"
+require "../#{jumpstart_folder}/marginalia"
 require "../#{jumpstart_folder}/meta_tag"
+require "../#{jumpstart_folder}/notable"
 require "../#{jumpstart_folder}/pagy"
 require "../#{jumpstart_folder}/pghero"
 require "../#{jumpstart_folder}/premailer_rails"
 require "../#{jumpstart_folder}/pry_rails"
+require "../#{jumpstart_folder}/rack_mini_profiler"
 require "../#{jumpstart_folder}/rollbar"
 require "../#{jumpstart_folder}/sidekiq"
 require "../#{jumpstart_folder}/simple_form"
 require "../#{jumpstart_folder}/sitemap"
+require "../#{jumpstart_folder}/slowpoke"
 require "../#{jumpstart_folder}/webpack"
 require "../#{jumpstart_folder}/whenever"
 
@@ -124,18 +133,25 @@ setup_loaf
 setup_draper
 setup_friendly_id
 setup_devise
+setup_audited
 setup_sidekiq
-# setup_pghero
-setup_exception_notification
+setup_pghero
+setup_marginalia
+# setup_exception_notification
 setup_bullet
 setup_letter_opener
 setup_premailer
 setup_dotenv
+setup_rack_mini_profiler
 setup_rollbar
+setup_lockbox
 setup_capistrano
 setup_whenever
 setup_sitemap
+setup_slowpoke
 setup_pry_rails
+setup_notable
+setup_lograge
 update_gitignore
 setup_cloudflare
 finalize_setting

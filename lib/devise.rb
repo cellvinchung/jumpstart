@@ -11,6 +11,7 @@ def setup_devise
     generate 'devise', devise_model
     generate "devise:i18n:views #{devise_model}"
     generate 'devise:i18n:locale zh-TW'
+
   end
 end
 
@@ -20,4 +21,7 @@ def devise_gems
   gem 'devise', '~> 4.7', '>= 4.7.0'
   gem 'devise-i18n'
   gem 'omniauth-google-oauth2'
+  gem 'omniauth-facebook'
+  gem 'omniauth-twitter'
+  gem 'omniauth-line', git: 'git@github.com:chrislintw/omniauth-line.git'
 end
