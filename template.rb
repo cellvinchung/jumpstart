@@ -11,7 +11,6 @@ def add_common_gems
 
     # Entity-Relationship Diagrams
     gem 'rails-erd'
-    gem 'hirb-unicode', require: false
     gem 'rspec-rails', '~> 3.7'
     gem 'i18n-spec'
     gem 'better_errors'
@@ -76,44 +75,44 @@ def finalize_setting
     setup_annotate
 
     p "TODO: in console, run Lockbox.generate_key \n
-    add/move keys(omniautu, lockobx, rollbar, etc.) to credentials"
+    add/move keys(omniauth, lockobx, rollbar, etc.) to credentials"
   end
 end
 
-jumpstart_folder = 'jumpstart/lib'
-require "../#{jumpstart_folder}/annotate"
-require "../#{jumpstart_folder}/application"
-require "../#{jumpstart_folder}/audited"
-require "../#{jumpstart_folder}/bullet"
-require "../#{jumpstart_folder}/capistrano"
-require "../#{jumpstart_folder}/cloudflare"
-require "../#{jumpstart_folder}/devise"
-require "../#{jumpstart_folder}/draper"
-require "../#{jumpstart_folder}/dotenv"
-require "../#{jumpstart_folder}/exception_notification"
-require "../#{jumpstart_folder}/friendly_id"
-require "../#{jumpstart_folder}/gitignore"
-require "../#{jumpstart_folder}/gon"
-require "../#{jumpstart_folder}/i18n"
-require "../#{jumpstart_folder}/letter_opener"
-require "../#{jumpstart_folder}/loaf"
-require "../#{jumpstart_folder}/lockbox"
-require "../#{jumpstart_folder}/lograge"
-require "../#{jumpstart_folder}/marginalia"
-require "../#{jumpstart_folder}/meta_tag"
-require "../#{jumpstart_folder}/notable"
-require "../#{jumpstart_folder}/pagy"
-require "../#{jumpstart_folder}/pghero"
-require "../#{jumpstart_folder}/premailer_rails"
-require "../#{jumpstart_folder}/pry_rails"
-require "../#{jumpstart_folder}/rack_mini_profiler"
-require "../#{jumpstart_folder}/rollbar"
-require "../#{jumpstart_folder}/sidekiq"
-require "../#{jumpstart_folder}/simple_form"
-require "../#{jumpstart_folder}/sitemap"
-require "../#{jumpstart_folder}/slowpoke"
-require "../#{jumpstart_folder}/webpack"
-require "../#{jumpstart_folder}/whenever"
+$jumpstart_folder = 'jumpstart/lib'
+require "../#{$jumpstart_folder}/annotate"
+require "../#{$jumpstart_folder}/application"
+require "../#{$jumpstart_folder}/audited"
+require "../#{$jumpstart_folder}/bullet"
+require "../#{$jumpstart_folder}/capistrano"
+require "../#{$jumpstart_folder}/cloudflare"
+require "../#{$jumpstart_folder}/devise"
+require "../#{$jumpstart_folder}/draper"
+require "../#{$jumpstart_folder}/dotenv"
+require "../#{$jumpstart_folder}/exception_notification"
+require "../#{$jumpstart_folder}/friendly_id"
+require "../#{$jumpstart_folder}/gitignore"
+require "../#{$jumpstart_folder}/gon"
+require "../#{$jumpstart_folder}/i18n"
+require "../#{$jumpstart_folder}/letter_opener"
+require "../#{$jumpstart_folder}/loaf"
+require "../#{$jumpstart_folder}/lockbox"
+require "../#{$jumpstart_folder}/lograge"
+require "../#{$jumpstart_folder}/marginalia"
+require "../#{$jumpstart_folder}/meta_tag"
+require "../#{$jumpstart_folder}/notable"
+require "../#{$jumpstart_folder}/pagy"
+require "../#{$jumpstart_folder}/pghero"
+require "../#{$jumpstart_folder}/premailer_rails"
+require "../#{$jumpstart_folder}/pry_rails"
+require "../#{$jumpstart_folder}/rack_mini_profiler"
+require "../#{$jumpstart_folder}/rollbar"
+require "../#{$jumpstart_folder}/sidekiq"
+require "../#{$jumpstart_folder}/simple_form"
+require "../#{$jumpstart_folder}/sitemap"
+require "../#{$jumpstart_folder}/slowpoke"
+require "../#{$jumpstart_folder}/webpack"
+require "../#{$jumpstart_folder}/whenever"
 
 add_common_gems
 after_bundle do

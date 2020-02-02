@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require 'webpack/bootstrap'
-require 'webpack/data_confirm_modal'
-require 'webpack/flatpickr'
-require 'webpack/fontawesome'
-require 'webpack/local_time'
-require 'webpack/noty'
+require "../#{$jumpstart_folder}/webpack/bootstrap"
+require "../#{$jumpstart_folder}/webpack/data_confirm_modal"
+require "../#{$jumpstart_folder}/webpack/flatpickr"
+require "../#{$jumpstart_folder}/webpack/fontawesome"
+require "../#{$jumpstart_folder}/webpack/local_time"
+require "../#{$jumpstart_folder}/webpack/noty"
 
 def setup_webpack
   after_bundle do
-    run 'yarn add --dev expose-loader jquery popper.js bootstrap \
+    run 'yarn add --dev expose-loader jquery @popperjs/core bootstrap \
     data-confirm-modal flatpickr local-time i18n-js @fortawesome/fontawesome-free \
     noty axios'
     create_stylesheet

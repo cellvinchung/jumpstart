@@ -17,5 +17,5 @@ end
 private
 
 def sitemap_gems
-  gem 'sitemap_generator', '~> 6.0', '>= 6.0.1', group: %i[development production], require: false
+  gem 'sitemap_generator', group: %i[development production]
 end
