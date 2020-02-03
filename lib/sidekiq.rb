@@ -60,6 +60,7 @@ def custom_yml
       :logfile: log/sidekiq.log
       :queues:
         - default
+        - mailers
     YML
   end
 end

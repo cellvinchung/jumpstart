@@ -7,6 +7,17 @@ def setup_rollbar
   rollbar_gems
   after_bundle do
     generate "rollbar #{rollbar_key}"
+    append_file 'Capfile' do
+      <<~RUBY
+        require 'rollbar/capistrano'
+      RUBY
+    end
+
+    append_file 'config/deploy.rb' do
+      set :rollbar_token, 'POST_SERVER_ITEM_ACCESS_TOKEN'
+      set :rollbar_env, Proc.new { fetch :stage }
+      set :rollbar_role, Proc.new { :app }
+    end
   end
 end
 

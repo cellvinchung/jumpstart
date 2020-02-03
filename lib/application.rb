@@ -14,6 +14,7 @@ def update_application
         config.i18n.available_locales = [:"zh-TW", :en]
         config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
         config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
+        config.hosts << "lvh.me"
       RUBY
     end
     uncomment_lines 'config/environments/production.rb', /require_master_key/

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "../#{$jumpstart_folder}/pundit"
+
 def setup_devise
   devise_model = ask('input the model name for devise, or [n] to skip devise setup:')
   return unless devise_model.present? && %w[n no].exclude?(devise_model.downcase)
@@ -11,8 +13,9 @@ def setup_devise
     generate 'devise', devise_model
     generate "devise:i18n:views #{devise_model}"
     generate 'devise:i18n:locale zh-TW'
-
   end
+
+  setup_pundit
 end
 
 private

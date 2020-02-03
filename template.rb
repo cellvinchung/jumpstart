@@ -90,6 +90,7 @@ require "../#{$jumpstart_folder}/devise"
 require "../#{$jumpstart_folder}/draper"
 require "../#{$jumpstart_folder}/dotenv"
 require "../#{$jumpstart_folder}/exception_notification"
+require "../#{$jumpstart_folder}/foreman"
 require "../#{$jumpstart_folder}/friendly_id"
 require "../#{$jumpstart_folder}/gitignore"
 require "../#{$jumpstart_folder}/gon"
@@ -153,4 +154,5 @@ setup_notable
 setup_lograge
 update_gitignore
 setup_cloudflare
+setup_foreman
 finalize_setting
