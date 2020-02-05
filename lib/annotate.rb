@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 def setup_annotate
-  p 'setup annotate started'
   annotate_gems
 
   after_bundle do
@@ -13,7 +12,6 @@ def setup_annotate
 
     run 'bundle exec annotate'
   end
-  p 'setup annotate finished'
 end
 
 private

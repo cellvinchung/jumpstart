@@ -19,11 +19,9 @@ def add_common_gems
     gem 'cacheflow'
     gem 'rubocop-rails', require: false
     gem 'solargraph', require: false
-    gem 'bumbler', require: false # 測試每個 gem 的加載速度
   end
 
   gem_group :production, :development do
-    gem 'cocoon'
     gem 'active_link_to'
     gem 'ruby-progressbar', require: false
   end
@@ -43,8 +41,6 @@ def add_common_gems
 
   gem 'http'
 
-  gem 'image_processing'
-
   gem 'active_hash'
   gem 'decent_exposure', '3.0.2'
 
@@ -63,19 +59,14 @@ def add_common_gems
   gem 'groupdate', require: false
 end
 
-def setup_activestorage
-  rails_command 'active_storage:install'
-
-  # TODO: setup direct_upload
+def setup_action_text
+  rails_command 'action_text:install'
 end
 
 def finalize_setting
   after_bundle do
     rails_command 'db:migrate'
     setup_annotate
-
-    p "TODO: in console, run Lockbox.generate_key \n
-    add/move keys(omniauth, lockobx, rollbar, etc.) to credentials"
   end
 end
 
@@ -89,6 +80,7 @@ require "../#{$jumpstart_folder}/cloudflare"
 require "../#{$jumpstart_folder}/devise"
 require "../#{$jumpstart_folder}/draper"
 require "../#{$jumpstart_folder}/dotenv"
+require "../#{$jumpstart_folder}/error_handling"
 require "../#{$jumpstart_folder}/exception_notification"
 require "../#{$jumpstart_folder}/foreman"
 require "../#{$jumpstart_folder}/friendly_id"
@@ -119,7 +111,7 @@ add_common_gems
 after_bundle do
   rails_command 'db:create'
   run 'spring stop'
-  setup_activestorage
+  setup_action_text
 end
 
 setup_webpack
@@ -154,5 +146,6 @@ setup_notable
 setup_lograge
 update_gitignore
 setup_cloudflare
+setup_error_handling
 setup_foreman
 finalize_setting

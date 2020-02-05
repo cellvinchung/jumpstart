@@ -13,6 +13,7 @@ def setup_devise
     generate 'devise', devise_model
     generate "devise:i18n:views #{devise_model}"
     generate 'devise:i18n:locale zh-TW'
+    set_omniauth
   end
 
   setup_pundit
@@ -27,4 +28,40 @@ def devise_gems
   gem 'omniauth-facebook'
   gem 'omniauth-twitter'
   gem 'omniauth-line', git: 'git@github.com:chrislintw/omniauth-line.git'
+end
+
+def set_omniauth
+  inject_into_class 'app/models/user.rb', 'User' do
+    <<~RUBY
+      has_many :oauth_providers, dependent: :destroy
+      devise :omniauthable, omniauth_providers: [:google, :facebook, :twitter, :line]
+    RUBY
+  end
+  generate 'model oauth_provider user:references provider:string uid:string:index expires_at:datetime access_token:string access_token_secret:string refresh_token:string auth:text'
+  inject_into_class 'app/models/oauth_provider.rb', 'OauthProvider' do
+    <<~RUBY
+      validates :uid, :provider, presence: true
+      validates :uid, uniqueness: { scope: :provider }
+    RUBY
+  end
+  devise_omniauth
+end
+
+def devise_omniauth
+  insert_into_file 'config/initializers/devise.rb', after: "# ==> OmniAuth\n" do
+    <<~RUBY
+      pending "add omniauth information to credentials"
+      config.omniauth :google_oauth2, Rails.application.credentials.dig(Rails.env.to_sym, :google, :client_id), Rails.application.credentials.dig(Rails.env.to_sym, :google, :client_secret), {
+        name: 'google'
+      }
+      config.omniauth :facebook, Rails.application.credentials.dig(Rails.env.to_sym, :facebook, :app_id), Rails.application.credentials.dig(Rails.env.to_sym, :facebook, :secret),{
+        secure_image_url: true
+      }
+      config.omniauth :twitter, Rails.application.credentials.dig(Rails.env.to_sym, :twitter, :api_key), Rails.application.credentials.dig(Rails.env.to_sym, :twitter, :api_secret), {
+        secure_image_url: true
+      }
+      config.omniauth :line, Rails.application.credentials.dig(Rails.env.to_sym, :line, :channel_id), Rails.application.credentials.dig(Rails.env.to_sym, :line, :channel_secret), {
+      }
+    RUBY
+  end
 end

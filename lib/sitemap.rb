@@ -4,8 +4,6 @@ def setup_sitemap
   sitemap_gems
 
   after_bundle do
-    rails_command 'sitemap:install'
-
     append_file 'Capfile' do
       <<~RUBY
         require 'capistrano/sitemap_generator'
@@ -17,5 +15,5 @@ end
 private
 
 def sitemap_gems
-  gem 'sitemap_generator', group: %i[development production]
+  gem 'sitemap_generator', group: %i[development production], require: false
 end

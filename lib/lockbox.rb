@@ -6,6 +6,7 @@ def setup_lockbox
   after_bundle do
     initializer 'lockbox.rb' do
       <<~RUBY
+        pending 'add lockbox_master_key to credentials'
         Lockbox.master_key = Rails.application.credentials.dig(Rails.env.to_sym, :lockbox_master_key)
       RUBY
     end

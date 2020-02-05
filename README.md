@@ -1,4 +1,4 @@
-# Rails Jumpstart Template
+# My Rails Application Template
 
 Initialize rails project with custom configuration. See [Rails Application Templates](https://edgeguides.rubyonrails.org/rails_application_templates.html)
 
@@ -12,7 +12,25 @@ Initialize rails project with custom configuration. See [Rails Application Templ
   rails new app_name -d postgresql --skip-turbolinks -m jumpstart/template.rb
   ```
 
-## Content
+3. add/move keys to credentials or .env file
+
+## Content(WIP)
+
+### Application Settings
+
+- Use active storage
+- Use action text
+- Disable auto generated stylesheets & helpers
+- Time zone: Taipei
+- Add middleware `ActionDispatch::Static, Rack::Deflater` - [smaller rails page size](https://www.schneems.com/2017/11/08/80-smaller-rails-footprint-with-rack-deflate/)
+- Add hosts `lvh.me`
+- require master_key
+- I18n
+  - [i18n-active_record](https://github.com/svenfuchs/i18n-active_record) - Lookup translations in the database
+- Locale
+  - default: zh-TW
+  - available: zh-TW, en
+  - load path: `config/locales/**/*.{yml,rb}`
 
 ### Development Experience
 
@@ -20,12 +38,24 @@ Initialize rails project with custom configuration. See [Rails Application Templ
 - [bullet](https://github.com/flyerhzm/bullet) - Help to kill N+1 queries and unused eager loading
 - [dotenv](https://github.com/bkeepers/dotenv) - Load environment variables from .env into ENV
 - [letter_opener](https://github.com/ryanb/letter_opener) - Preview email in the default browser instead of sending it
-- [pghero](https://github.com/ankane/pghero) - Performance dashboard for postgres
 - [premailer-rails](https://github.com/fphilipe/premailer-rails) - CSS styled emails
+- [pry-rails](https://github.com/rweng/pry-rails) - Better IRB shell
+- [rack-mini-profiler](https://github.com/MiniProfiler/rack-mini-profiler) - Displays speed badge for every html page
+  - [memory_profiler](https://github.com/SamSaffron/memory_profiler) - For memory profiling
+  - [flamegraph](https://github.com/SamSaffron/flamegraph) & [stackprof](https://github.com/tmm1/stackprof) - For call-stack profiling flamegraphs
+- [better_errors](https://github.com/BetterErrors/better_errors) - Better error page
+- [cacheflow](https://github.com/ankane/cacheflow) - Colorized logging for Memcached and Redis
+- [capistrano](https://github.com/capistrano/capistrano) - Deployment automation
+  - [rvm1-capistrano3](https://github.com/rvm/rvm1-capistrano3)
+  - [capistrano-upload-config](https://github.com/rjocoleman/capistrano-upload-config) - Upload, initialize and maintain configuration files
+  - [capistrano-passenger](https://github.com/capistrano/passenger)
+  - [capistrano-sidekiq](https://github.com/seuros/capistrano-sidekiq)
+- [rails-erd](https://github.com/voormedia/rails-erd) - Generate entity-relationship diagrams
+- Add `Procfile` for [foreman](https://github.com/ddollar/foreman). ([DON'T install foreman in projects!](https://github.com/ddollar/foreman/wiki/Don't-Bundle-Foreman))
 
 ### Assets Related
 
-- webpacker
+- [webpacker](https://github.com/rails/webpacker)
   - [bootstrap](https://getbootstrap.com/)
   - [data-confirm-modal](https://www.npmjs.com/package/data-confirm-modal)
   - [flatpicker](https://flatpickr.js.org/) - datepicker/datetimepicker
@@ -35,45 +65,76 @@ Initialize rails project with custom configuration. See [Rails Application Templ
   - [i18njs](https://www.npmjs.com/package/i18njs)
   - [axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser
 - [gon](https://github.com/gazay/gon) - Use rails variables in js
+- [inline_svg](https://github.com/jamesmartin/inline_svg) - Styling SVG documents with CSS
 
 ### Presentation Related
 
+- [active_link_to](https://github.com/comfy/active_link_to) - View helper to manage `active` state of a link
 - [draper](https://github.com/drapergem/draper) - Add object-oriented layer of presentation logic
 - [friendly_id](https://github.com/norman/friendly_id) - Pretty URLs
-- [babosa](https://github.com/norman/babosa) - Improvement of the string code from friendly_id
+  - [babosa](https://github.com/norman/babosa) - Improvement of the string code from friendly_id
 - [loaf](https://github.com/piotrmurach/loaf) - Breadcrumb
-- [meta-tags](https://github.com/kpumuk/meta-tags) - Search Engine Optimization
 - [pagy](https://github.com/ddnexus/pagy) - Pagination
+- [simple_form](https://github.com/heartcombo/simple_form) - Forms made easy for rails (initialized with bootstrap)
+- [sitemap_generator](https://github.com/kjvarga/sitemap_generator)
+- [meta-tags](https://github.com/kpumuk/meta-tags)
+
+### Background Job
+
+- [sidekiq](https://github.com/mperham/sidekiq)
+  - [activejob-traffic_control](https://github.com/nickelser/activejob-traffic_control) - Rate limiting/job enabling for ActiveJob using distributed locks
+  - [sidekiq-statistic](https://github.com/davydovanton/sidekiq-statistic) - Improved display of statistics
+  - [sidekiq-cron](https://github.com/ondrejbartas/sidekiq-cron) - Scheduler / Cron for Sidekiq jobs
+  - [sidekiq-unique-jobs](https://github.com/mhenrixon/sidekiq-unique-jobs) - Ensure uniqueness of Sidekiq jobs
+  - [sidekiq-status](https://github.com/utgarda/sidekiq-status) - An extension to Sidekiq message processing to track jobs
 
 ### Security
 
 - [lockbox](https://github.com/ankane/lockbox) - Encrypted fields and files
   - [blind_index](https://github.com/ankane/blind_index) - Securely search encrypted database fields
   - [kms_encrypted](https://github.com/ankane/kms_encrypted) - Secure key management
+- [brakeman](https://github.com/presidentbeef/brakeman) - Checks rails applications for security vulnerabilities
+- [rack-attack](https://github.com/kickstarter/rack-attack) - Rack middleware for blocking & throttling
 
-### Audits & Log
+### Performance
+
+- [oj](https://github.com/ohler55/oj) - Speed up JSON parsing
+- [counter_culture](https://github.com/magnusvk/counter_culture) - Huge improvements over the rails standard counter caches
+- [activerecord_where_assoc](https://github.com/MaxLap/activerecord_where_assoc) - do conditions based on the associations (Using SQL's `EXISTS` operator)
+
+### Tracking & Log Related
 
 - [audited](https://github.com/collectiveidea/audited) - Logs all changes to models
 - [lograge](https://github.com/roidrage/lograge) - Simplify rails' default request logging
 - [marginalia](https://github.com/basecamp/marginalia) - Attach comments to ActiveRecord queries
 - [notable](https://github.com/ankane/notable) - Tracks notable requests and background jobs and stores them in database
 
+### Test
+
+- [rspec-rails](https://github.com/rspec/rspec-rails)
+
 ### Others
 
-- disable auto generated stylesheets & helpers
-- time zone: Taipei
-- locale
-  - default: zh-TW
-  - available: zh-TW, en
-  - split yml files into different folder
-- add middleware `ActionDispatch::Static, Rack::Deflater` - [references](https://www.schneems.com/2017/11/08/80-smaller-rails-footprint-with-rack-deflate/)
-- add hosts `lvh.me`
-- i18n
-  - [i18n-active_record](https://github.com/svenfuchs/i18n-active_record) - lookup translations in the database
+- [slowpoke](https://github.com/ankane/slowpoke) - Rack::Timeout enhancements for rails
+- [whenever](https://github.com/javan/whenever) - Cron jobs in Ruby
+- [discard](https://github.com/jhawthorn/discard) - Soft delete
+- [strip_attributes](https://github.com/rmm5t/strip_attributes) - Automatically strips leading and trailing whitespace
+- [browser](https://github.com/fnando/browser) - Browser detection
+- [aasm](https://github.com/aasm/aasm) - State machine
+- [http](https://github.com/httprb/http) - Ruby HTTP client
+- [active_hash](https://github.com/zilkey/active_hash) - Use a ruby hash as a readonly datasource for an ActiveRecord-like model
+- [decent_exposure](https://github.com/hashrocket/decent_exposure) - Creating declarative interfaces in controllers
+- [activerecord-import](https://github.com/zdennis/activerecord-import) - Bulk inserting data using ActiveRecord
+- [groupdate](https://github.com/ankane/groupdate) - Group time data
 
 ### Optional
 
-- devise
-- pundit
-- cloudflare-rails
-- rollbar
+- [devise](https://github.com/heartcombo/devise) - Authentication
+  - [pundit](https://github.com/varvet/pundit) - Authorization
+  - [omniauth-google-oauth2](https://github.com/zquestz/omniauth-google-oauth2)
+  - [omniauth-facebook](https://github.com/simi/omniauth-facebook)
+  - [omniauth-twitter](https://github.com/arunagw/omniauth-twitter)
+  - [omniauth-line](https://github.com/chrislintw/omniauth-line)
+- [cloudflare-rails](https://github.com/modosc/cloudflare-rails) - Fix `request.ip` and `request.remote_ip` in rails when using Cloudflare
+- [rollbar](https://rollbar.com/) - Error Tracking
+- [pghero](https://github.com/ankane/pghero) - Performance dashboard for postgres

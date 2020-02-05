@@ -5,6 +5,16 @@ def setup_rack_mini_profiler
 
   after_bundle do
     generate 'rack_profiler:install'
+    initializer 'rack_mini_profiler.rb' do
+      <<~RUBY
+        if Rails.env.development?
+          require 'rack-mini-profiler'
+          Rack::MiniProfilerRails.initialize!(Rails.application)
+          Rails.application.middleware.delete(Rack::MiniProfiler)
+          Rails.application.middleware.insert_after(Rack::Deflater, Rack::MiniProfiler)
+        end
+      RUBY
+    end
   end
 end
 
