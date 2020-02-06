@@ -63,7 +63,7 @@ def set_config
   append_file 'config/deploy.rb' do
     <<~RUBY
       set :init_system, :systemd
-      set :service_unit_name, "sidekiq-#{fetch(:application)}-#{fetch(:stage)}.service"
+      set :service_unit_name, "sidekiq-\#{fetch(:application)}-\#{fetch(:stage)}.service"
       set :sidekiq_monit_use_sudo, false
 
       before 'deploy', 'rvm1:install:rvm'

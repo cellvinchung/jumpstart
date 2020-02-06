@@ -117,6 +117,7 @@ end
 setup_webpack
 setup_i18n
 update_application
+setup_capistrano
 setup_simple_form
 setup_gon
 setup_meta_tag
@@ -137,7 +138,6 @@ setup_dotenv
 setup_rack_mini_profiler
 setup_rollbar
 setup_lockbox
-setup_capistrano
 setup_whenever
 setup_sitemap
 setup_slowpoke

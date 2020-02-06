@@ -50,7 +50,6 @@ end
 def devise_omniauth
   insert_into_file 'config/initializers/devise.rb', after: "# ==> OmniAuth\n" do
     <<~RUBY
-      pending "add omniauth information to credentials"
       config.omniauth :google_oauth2, Rails.application.credentials.dig(Rails.env.to_sym, :google, :client_id), Rails.application.credentials.dig(Rails.env.to_sym, :google, :client_secret), {
         name: 'google'
       }

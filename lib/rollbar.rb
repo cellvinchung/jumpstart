@@ -14,9 +14,11 @@ def setup_rollbar
     end
 
     append_file 'config/deploy.rb' do
-      set :rollbar_token, 'POST_SERVER_ITEM_ACCESS_TOKEN'
-      set :rollbar_env, Proc.new { fetch :stage }
-      set :rollbar_role, Proc.new { :app }
+      <<~RUBY
+        set :rollbar_token, 'POST_SERVER_ITEM_ACCESS_TOKEN'
+        set :rollbar_env, Proc.new { fetch :stage }
+        set :rollbar_role, Proc.new { :app }
+      RUBY
     end
   end
 end
