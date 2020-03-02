@@ -12,7 +12,7 @@ end
 private
 
 def lograge_gems
-  gem 'lograge'
+  gem 'lograge', '~> 0.11.2'
 end
 
 def cunstom_lograge

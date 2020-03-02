@@ -15,7 +15,7 @@ end
 private
 
 def lockbox_gems
-  gem 'lockbox'
-  gem 'blind_index'
-  gem 'kms_encrypted'
+  gem 'lockbox', '~> 0.3.3'
+  gem 'blind_index', '~> 2.0', '>= 2.0.1'
+  gem 'kms_encrypted', '~> 1.1'
 end

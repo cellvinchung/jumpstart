@@ -35,5 +35,5 @@ end
 private
 
 def dotenv_gems
-  gem 'dotenv-rails', group: %i[development test]
+  gem 'dotenv-rails', '~> 2.7', '>= 2.7.5', group: %i[development test]
 end

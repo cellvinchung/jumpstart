@@ -2,61 +2,61 @@
 
 def add_common_gems
   gem_group :development, :test do
-    gem 'factory_bot_rails'
-    gem 'faker', git: 'https://github.com/stympy/faker.git'
+    gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
+    gem 'faker', '~> 2.10', '>= 2.10.2'
   end
 
   gem_group :development do
-    gem 'brakeman', require: false
+    gem 'brakeman', '~> 4.8', require: false
 
     # Entity-Relationship Diagrams
-    gem 'rails-erd'
+    gem 'rails-erd', '~> 1.6'
     gem 'rspec-rails', '~> 3.7'
-    gem 'i18n-spec'
-    gem 'better_errors'
-    gem 'binding_of_caller'
+    gem 'i18n-spec', github: 'tigrish/i18n-spec'
+    gem 'better_errors', '~> 2.6'
+    gem 'binding_of_caller', '~> 0.8.0'
 
-    gem 'cacheflow'
-    gem 'rubocop-rails', require: false
-    gem 'solargraph', require: false
+    gem 'cacheflow', '~> 0.1.1'
+    gem 'rubocop-rails', '~> 2.4', '>= 2.4.2', require: false
+    gem 'solargraph', '~> 0.38.5', require: false
   end
 
   gem_group :production, :development do
-    gem 'active_link_to'
-    gem 'ruby-progressbar', require: false
+    gem 'active_link_to', '~> 1.0', '>= 1.0.5'
+    gem 'ruby-progressbar', '~> 1.10', '>= 1.10.1', require: false
   end
 
-  gem 'image_processing'
-  gem 'discard', '~> 1.0'
+  gem 'image_processing', '~> 1.10', '>= 1.10.3'
+  gem 'discard', '~> 1.2'
 
-  gem 'oj'
+  gem 'oj', '~> 3.10', '>= 3.10.3'
 
   # 移除欄位空白
-  gem 'strip_attributes'
+  gem 'strip_attributes', '~> 1.9', '>= 1.9.2'
 
-  gem 'browser'
+  gem 'browser', '~> 4.0'
 
   # 狀態機
-  gem 'aasm'
+  gem 'aasm', '~> 5.0', '>= 5.0.6'
 
-  gem 'http'
+  gem 'http', '~> 4.3'
 
-  gem 'active_hash'
+  gem 'active_hash', '~> 3.1'
   gem 'decent_exposure', '3.0.2'
 
   # bulk insert
-  gem 'activerecord-import'
+  gem 'activerecord-import', '~> 1.0', '>= 1.0.4'
 
-  gem 'inline_svg'
+  gem 'inline_svg', '~> 1.7'
 
   gem 'counter_culture', '~> 2.0'
 
   # do conditions based on the associations of your records
-  gem 'activerecord_where_assoc', '~> 1.0'
+  gem 'activerecord_where_assoc', '~> 1.1'
 
-  gem 'rack-attack'
+  gem 'rack-attack', '~> 6.2', '>= 6.2.2'
 
-  gem 'groupdate', require: false
+  gem 'groupdate', '~> 5.0', require: false
 end
 
 def setup_action_text

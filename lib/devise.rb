@@ -23,10 +23,10 @@ private
 
 def devise_gems
   gem 'devise', '~> 4.7', '>= 4.7.0'
-  gem 'devise-i18n'
-  gem 'omniauth-google-oauth2'
-  gem 'omniauth-facebook'
-  gem 'omniauth-twitter'
+  gem 'devise-i18n', '~> 1.9'
+  gem 'omniauth-google-oauth2', '~> 0.8.0'
+  gem 'omniauth-facebook', '~> 6.0'
+  gem 'omniauth-twitter', '~> 1.4'
   gem 'omniauth-line', git: 'git@github.com:chrislintw/omniauth-line.git'
 end
 

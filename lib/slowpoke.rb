@@ -12,7 +12,7 @@ end
 private
 
 def slowpoke_gems
-  gem 'slowpoke', group: %i[production development]
+  gem 'slowpoke', '~> 0.3.2', group: %i[production development]
 end
 
 def custom_slowpoke

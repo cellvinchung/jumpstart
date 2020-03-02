@@ -17,5 +17,5 @@ end
 private
 
 def annotate_gems
-  gem 'annotate', git: 'https://github.com/ctran/annotate_models.git', group: %i[development]
+  gem 'annotate', '~> 3.1', group: %i[development]
 end

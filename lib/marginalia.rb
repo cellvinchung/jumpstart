@@ -14,5 +14,5 @@ end
 private
 
 def marginalia_gems
-  gem 'marginalia'
+  gem 'marginalia', '~> 1.8'
 end

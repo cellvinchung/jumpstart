@@ -15,5 +15,5 @@ end
 private
 
 def gon_gems
-  gem 'gon'
+  gem 'gon', '~> 6.3', '>= 6.3.2'
 end

@@ -17,5 +17,5 @@ end
 private
 
 def notable_gems
-  gem 'notable'
+  gem 'notable', '~> 0.3.0'
 end

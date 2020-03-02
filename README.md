@@ -84,7 +84,7 @@ Initialize rails project with custom configuration. See [Rails Application Templ
 - [sidekiq](https://github.com/mperham/sidekiq)
   - [activejob-traffic_control](https://github.com/nickelser/activejob-traffic_control) - Rate limiting/job enabling for ActiveJob using distributed locks
   - [sidekiq-statistic](https://github.com/davydovanton/sidekiq-statistic) - Improved display of statistics
-  - [sidekiq-cron](https://github.com/ondrejbartas/sidekiq-cron) - Scheduler / Cron for Sidekiq jobs
+  - [sidekiq-scheduler](https://github.com/moove-it/sidekiq-scheduler) - Scheduler for Sidekiq jobs
   - [sidekiq-unique-jobs](https://github.com/mhenrixon/sidekiq-unique-jobs) - Ensure uniqueness of Sidekiq jobs
   - [sidekiq-status](https://github.com/utgarda/sidekiq-status) - An extension to Sidekiq message processing to track jobs
 

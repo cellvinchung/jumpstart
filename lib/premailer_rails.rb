@@ -14,5 +14,5 @@ end
 private
 
 def premailer_gems
-  gem 'premailer-rails'
+  gem 'premailer-rails', '~> 1.10', '>= 1.10.3'
 end

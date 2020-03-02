@@ -15,7 +15,7 @@ end
 private
 
 def pagy_gems
-  gem 'pagy', '~> 3.5'
+  gem 'pagy', '~> 3.7', '>= 3.7.3'
 end
 
 def add_backend

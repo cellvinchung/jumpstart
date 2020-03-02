@@ -26,5 +26,5 @@ end
 private
 
 def rollbar_gems
-  gem 'rollbar', group: %i[production development]
+  gem 'rollbar', '~> 2.24', group: %i[production development]
 end
