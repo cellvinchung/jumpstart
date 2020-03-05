@@ -6,12 +6,13 @@ require "../#{$jumpstart_folder}/webpack/flatpickr"
 require "../#{$jumpstart_folder}/webpack/fontawesome"
 require "../#{$jumpstart_folder}/webpack/local_time"
 require "../#{$jumpstart_folder}/webpack/noty"
+require "../#{$jumpstart_folder}/webpack/uppy"
 
 def setup_webpack
   after_bundle do
     run 'yarn add --dev expose-loader jquery @popperjs/core bootstrap \
     data-confirm-modal flatpickr local-time i18n-js @fortawesome/fontawesome-free \
-    noty axios'
+    noty axios @uppy/core @uppy/dashboard @uppy/status-bar https://github.com/excid3/uppy-activestorage-upload.git'
     create_stylesheet
     custom_webpack_env
     custom_application_pack
@@ -71,4 +72,5 @@ def setup_plugins
   setup_localtime
   setup_data_confirm_modal
   setup_noty
+  setup_uppy
 end

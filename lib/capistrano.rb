@@ -5,7 +5,7 @@ def setup_capistrano
 
   after_bundle do
     run 'cap install'
-    run 'cap sidekiq:install'
+    # run 'cap sidekiq:install'
 
     custom_capfile
     custom_deploy

@@ -4,6 +4,7 @@ def add_common_gems
   gem_group :development, :test do
     gem 'factory_bot_rails'
     gem 'faker', git: 'https://github.com/stympy/faker.git'
+    gem 'database_cleaner'
   end
 
   gem_group :development do
@@ -66,7 +67,6 @@ end
 def finalize_setting
   after_bundle do
     rails_command 'db:migrate'
-    setup_annotate
   end
 end
 
@@ -114,6 +114,7 @@ after_bundle do
   setup_action_text
 end
 
+setup_annotate
 setup_webpack
 setup_i18n
 update_application

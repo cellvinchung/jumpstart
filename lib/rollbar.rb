@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 def setup_rollbar
-  rollbar_key = ask('input rollbar_key, or [n] to skip rollbar setup:')
-  return unless rollbar_key.present? && %w[n no].exclude?(rollbar_key.downcase)
+  return unless yes?('using rollbar? [y/N]')
 
   rollbar_gems
   after_bundle do
-    generate "rollbar #{rollbar_key}"
+    generate "rollbar"
     append_file 'Capfile' do
       <<~RUBY
         require 'rollbar/capistrano'

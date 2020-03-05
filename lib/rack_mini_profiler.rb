@@ -22,7 +22,7 @@ private
 
 def rack_mini_profiler_gems
   gem_group :development do
-    gem 'rack-mini-profiler', require: false
+    gem 'rack-mini-profiler'
     gem 'memory_profiler'
     gem 'flamegraph'
     gem 'stackprof'
