@@ -15,12 +15,12 @@ private
 
 def sidekiq_gems
   gem_group :production, :development do
-    gem 'sidekiq', '>= 6'
-    gem 'sidekiq-statistic', git: 'https://github.com/davydovanton/sidekiq-statistic.git'
-    gem 'sidekiq-cron', '~> 1.1'
-    gem 'sidekiq-unique-jobs'
-    gem 'sidekiq-status'
-    gem 'activejob-traffic_control'
+    gem 'sidekiq', '~> 6.0', '>= 6.0.5'
+    gem 'sidekiq-statistic', '~> 1.4'
+    gem 'sidekiq-scheduler', '~> 3.0', '>= 3.0.1'
+    gem 'sidekiq-unique-jobs', '~> 6.0', '>= 6.0.18'
+    gem 'sidekiq-status', '~> 1.1', '>= 1.1.4'
+    gem 'activejob-traffic_control', '~> 0.1.3'
   end
 end
 

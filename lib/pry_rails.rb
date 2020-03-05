@@ -13,12 +13,12 @@ private
 
 def pry_gems
   gem_group :production, :development do
-    gem 'pry-rails'
-    gem 'hirb'
-    gem 'hirb-unicode-steakknife'
-    gem 'pry-byebug'
-    gem 'pry-stack_explorer'
-    gem 'awesome_rails_console', require: false
+    gem 'pry-rails', '~> 0.3.9'
+    gem 'hirb', '~> 0.7.3'
+    gem 'hirb-unicode-steakknife', '~> 0.0.9'
+    gem 'pry-byebug', '~> 3.8'
+    gem 'pry-stack_explorer', '~> 0.4.9.3'
+    gem 'awesome_rails_console', '~> 0.4.4', require: false
   end
 end
 

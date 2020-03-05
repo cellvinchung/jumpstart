@@ -12,10 +12,11 @@ def setup_webpack
   after_bundle do
     run 'yarn add --dev expose-loader jquery @popperjs/core bootstrap \
     data-confirm-modal flatpickr local-time i18n-js @fortawesome/fontawesome-free \
-    noty axios @uppy/core @uppy/dashboard @uppy/status-bar https://github.com/excid3/uppy-activestorage-upload.git'
+    noty axios @uppy/core @uppy/dashboard @uppy/status-bar https://github.com/excid3/uppy-activestorage-upload.git @fullhuman/postcss-purgecss'
     create_stylesheet
     custom_webpack_env
     custom_application_pack
+    setup_purgecss
 
     setup_plugins
   end
@@ -61,6 +62,28 @@ def custom_application_pack
       window.Rails = Rails
       import axios from 'axios';
       import "./custom";
+    JAVASCRIPT
+  end
+end
+
+def setup_purgecss
+  prepend_file 'postcss.config.js' do
+    <<~JAVASCRIPT
+      const purgecss = require('@fullhuman/postcss-purgecss')({
+        content: [
+          './src/**/*.html.*',
+          './src/**/*.vue',
+          './src/**/*.jsx',
+          // etc.
+        ],
+        defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
+      });
+    JAVASCRIPT
+  end
+
+  insert_into_file 'postcss.config.js', after: 'plugins: [\n' do
+    <<~JAVASCRIPT
+      ...process.env.NODE_ENV === 'production' ? [purgecss] : [],\n
     JAVASCRIPT
   end
 end

@@ -18,5 +18,5 @@ end
 private
 
 def draper_gems
-  gem 'draper'
+  gem 'draper', '~> 4.0'
 end

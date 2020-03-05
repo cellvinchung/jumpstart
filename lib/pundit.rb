@@ -16,5 +16,5 @@ end
 private
 
 def pundit_gems
-  gem 'pundit'
+  gem 'pundit', '~> 2.1'
 end

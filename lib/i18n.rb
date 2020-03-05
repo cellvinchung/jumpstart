@@ -36,7 +36,7 @@ def initializer_content
 end
 
 def i18n_gems
-  gem 'rails-i18n'
-  gem 'i18n-js'
-  gem 'i18n-active_record', require: 'i18n/active_record'
+  gem 'rails-i18n', '~> 6.0'
+  gem 'i18n-js', '~> 3.6'
+  gem 'i18n-active_record', '~> 0.4.0', require: 'i18n/active_record'
 end

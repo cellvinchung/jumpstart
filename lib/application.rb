@@ -5,7 +5,7 @@ def update_application
     application do
       <<~RUBY
         config.generators do |g|
-          g.stylesheets false
+          g.assets false
           g.helper false
         end
         config.time_zone = "Taipei"

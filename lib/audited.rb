@@ -11,5 +11,5 @@ end
 private
 
 def audited_gems
-  gem 'audited'
+  gem 'audited', '~> 4.9'
 end

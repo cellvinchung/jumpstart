@@ -13,5 +13,5 @@ end
 private
 
 def letter_opener_gems
-  gem 'letter_opener', group: %i[development]
+  gem 'letter_opener', '~> 1.7', group: %i[development]
 end

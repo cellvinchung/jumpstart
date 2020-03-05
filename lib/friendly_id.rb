@@ -12,5 +12,5 @@ private
 
 def friendly_id_gems
   gem 'friendly_id', '~> 5.2', '>= 5.2.5'
-  gem 'babosa'
+  gem 'babosa', '~> 1.0', '>= 1.0.3'
 end

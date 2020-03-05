@@ -18,11 +18,11 @@ private
 
 def capistrano_gems
   gem_group :development do
-    gem 'capistrano-rails', require: false
-    gem 'rvm1-capistrano3', require: false
-    gem 'capistrano-passenger', require: false
-    gem 'capistrano-upload-config', require: false
-    gem 'capistrano-sidekiq', require: false
+    gem 'capistrano-rails', '~> 1.4', require: false
+    gem 'rvm1-capistrano3', '~> 1.4', require: false
+    gem 'capistrano-passenger', '~> 0.2.0', require: false
+    gem 'capistrano-upload-config', '~> 0.8.2', require: false
+    gem 'capistrano-sidekiq', '~> 1.0', '>= 1.0.3', require: false
   end
 end
 
