@@ -22,7 +22,8 @@ def capistrano_gems
     gem 'rvm1-capistrano3', '~> 1.4', require: false
     gem 'capistrano-passenger', '~> 0.2.0', require: false
     gem 'capistrano-upload-config', '~> 0.8.2', require: false
-    gem 'capistrano-sidekiq', '~> 1.0', '>= 1.0.3', require: false
+    # fix sidekiq 6 support
+    gem 'capistrano-sidekiq', git: 'https://github.com/rwojnarowski/capistrano-sidekiq.git', require: false
   end
 end
 

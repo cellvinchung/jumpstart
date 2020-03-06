@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "../#{$jumpstart_folder}/pundit"
+require_relative "pundit"
 
 def setup_devise
   devise_model = ask('input the model name for devise, or [n] to skip devise setup:')
@@ -10,9 +10,9 @@ def setup_devise
 
   after_bundle do
     generate 'devise:install'
-    generate 'devise', devise_model
-    generate "devise:i18n:views #{devise_model}"
     generate 'devise:i18n:locale zh-TW'
+    generate 'devise', devise_model.capitalize
+    # generate "devise:i18n:views #{devise_model.capitalize}"
     set_omniauth
   end
 
@@ -31,10 +31,10 @@ def devise_gems
 end
 
 def set_omniauth
-  inject_into_class 'app/models/user.rb', 'User' do
+  insert_into_file 'app/models/user.rb', after: ":validatable" do
     <<~RUBY
+      , :omniauthable, omniauth_providers: [:google, :facebook, :twitter, :line]
       has_many :oauth_providers, dependent: :destroy
-      devise :omniauthable, omniauth_providers: [:google, :facebook, :twitter, :line]
     RUBY
   end
   generate 'model oauth_provider user:references provider:string uid:string:index expires_at:datetime access_token:string access_token_secret:string refresh_token:string auth:text'

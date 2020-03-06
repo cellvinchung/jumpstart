@@ -18,8 +18,6 @@ def add_common_gems
     gem 'binding_of_caller', '~> 0.8.0'
 
     gem 'cacheflow', '~> 0.1.1'
-    gem 'rubocop-rails', '~> 2.4', '>= 2.4.2', require: false
-    gem 'solargraph', '~> 0.38.5', require: false
   end
 
   gem_group :production, :development do
@@ -67,45 +65,47 @@ end
 def finalize_setting
   after_bundle do
     rails_command 'db:migrate'
+
+    run 'gem install rubocop-rails'
+    run 'gem install solargraph'
   end
 end
 
-$jumpstart_folder = 'jumpstart/lib'
-require "../#{$jumpstart_folder}/annotate"
-require "../#{$jumpstart_folder}/application"
-require "../#{$jumpstart_folder}/audited"
-require "../#{$jumpstart_folder}/bullet"
-require "../#{$jumpstart_folder}/capistrano"
-require "../#{$jumpstart_folder}/cloudflare"
-require "../#{$jumpstart_folder}/devise"
-require "../#{$jumpstart_folder}/draper"
-require "../#{$jumpstart_folder}/dotenv"
-require "../#{$jumpstart_folder}/error_handling"
-require "../#{$jumpstart_folder}/exception_notification"
-require "../#{$jumpstart_folder}/foreman"
-require "../#{$jumpstart_folder}/friendly_id"
-require "../#{$jumpstart_folder}/gitignore"
-require "../#{$jumpstart_folder}/gon"
-require "../#{$jumpstart_folder}/i18n"
-require "../#{$jumpstart_folder}/letter_opener"
-require "../#{$jumpstart_folder}/loaf"
-require "../#{$jumpstart_folder}/lockbox"
-require "../#{$jumpstart_folder}/lograge"
-require "../#{$jumpstart_folder}/marginalia"
-require "../#{$jumpstart_folder}/meta_tag"
-require "../#{$jumpstart_folder}/notable"
-require "../#{$jumpstart_folder}/pagy"
-require "../#{$jumpstart_folder}/pghero"
-require "../#{$jumpstart_folder}/premailer_rails"
-require "../#{$jumpstart_folder}/pry_rails"
-require "../#{$jumpstart_folder}/rack_mini_profiler"
-require "../#{$jumpstart_folder}/rollbar"
-require "../#{$jumpstart_folder}/sidekiq"
-require "../#{$jumpstart_folder}/simple_form"
-require "../#{$jumpstart_folder}/sitemap"
-require "../#{$jumpstart_folder}/slowpoke"
-require "../#{$jumpstart_folder}/webpack"
-require "../#{$jumpstart_folder}/whenever"
+require_relative "lib/annotate"
+require_relative "lib/application"
+require_relative "lib/audited"
+require_relative "lib/bullet"
+require_relative "lib/capistrano"
+require_relative "lib/cloudflare"
+require_relative "lib/devise"
+require_relative "lib/draper"
+require_relative "lib/dotenv"
+require_relative "lib/error_handling"
+require_relative "lib/exception_notification"
+require_relative "lib/foreman"
+require_relative "lib/friendly_id"
+require_relative "lib/gitignore"
+require_relative "lib/gon"
+require_relative "lib/i18n"
+require_relative "lib/letter_opener"
+require_relative "lib/loaf"
+require_relative "lib/lockbox"
+require_relative "lib/lograge"
+require_relative "lib/marginalia"
+require_relative "lib/meta_tag"
+require_relative "lib/notable"
+require_relative "lib/pagy"
+require_relative "lib/pghero"
+require_relative "lib/premailer_rails"
+require_relative "lib/pry_rails"
+require_relative "lib/rack_mini_profiler"
+require_relative "lib/rollbar"
+require_relative "lib/sidekiq"
+require_relative "lib/simple_form"
+require_relative "lib/sitemap"
+require_relative "lib/slowpoke"
+require_relative "lib/webpack"
+require_relative "lib/whenever"
 
 add_common_gems
 after_bundle do
@@ -114,10 +114,11 @@ after_bundle do
   setup_action_text
 end
 
+update_application
+setup_devise
 setup_annotate
 setup_webpack
 setup_i18n
-update_application
 setup_capistrano
 setup_simple_form
 setup_gon
@@ -126,7 +127,6 @@ setup_pagy
 setup_loaf
 setup_draper
 setup_friendly_id
-setup_devise
 setup_audited
 setup_sidekiq
 setup_pghero

@@ -4,7 +4,6 @@ def setup_rack_mini_profiler
   rack_mini_profiler_gems
 
   after_bundle do
-    generate 'rack_profiler:install'
     initializer 'rack_mini_profiler.rb' do
       <<~RUBY
         if Rails.env.development?
@@ -22,7 +21,7 @@ private
 
 def rack_mini_profiler_gems
   gem_group :development do
-    gem 'rack-mini-profiler', '~> 1.1', '>= 1.1.6'
+    gem 'rack-mini-profiler', '~> 1.1', '>= 1.1.6', require: false
     gem 'memory_profiler', '~> 0.9.14'
     gem 'flamegraph', '~> 0.9.5'
     gem 'stackprof', '~> 0.2.15'

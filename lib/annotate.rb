@@ -7,7 +7,7 @@ def setup_annotate
     generate 'annotate:install'
 
     gsub_file 'lib/tasks/auto_annotate_models.rake',
-              /'position_in_class'         => 'before'/,
+              "'position_in_class'         => 'before'",
               "'position_in_class'         => 'bottom'"
   end
 end

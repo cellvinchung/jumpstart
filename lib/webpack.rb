@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require "../#{$jumpstart_folder}/webpack/bootstrap"
-require "../#{$jumpstart_folder}/webpack/data_confirm_modal"
-require "../#{$jumpstart_folder}/webpack/flatpickr"
-require "../#{$jumpstart_folder}/webpack/fontawesome"
-require "../#{$jumpstart_folder}/webpack/local_time"
-require "../#{$jumpstart_folder}/webpack/noty"
-require "../#{$jumpstart_folder}/webpack/uppy"
+require_relative "webpack/bootstrap"
+require_relative "webpack/data_confirm_modal"
+require_relative "webpack/flatpickr"
+require_relative "webpack/fontawesome"
+require_relative "webpack/local_time"
+require_relative "webpack/noty"
+# require "../#{$jumpstart_folder}/webpack/uppy"
 
 def setup_webpack
   after_bundle do
-    run 'yarn add --dev expose-loader jquery @popperjs/core bootstrap \
+    run 'yarn add --dev expose-loader jquery bootstrap popper.js \
     data-confirm-modal flatpickr local-time i18n-js @fortawesome/fontawesome-free \
     noty axios @uppy/core @uppy/dashboard @uppy/status-bar https://github.com/excid3/uppy-activestorage-upload.git @fullhuman/postcss-purgecss'
     create_stylesheet
@@ -33,6 +33,7 @@ def create_stylesheet
   end
   append_file 'app/javascript/packs/application.js' do
     <<~JAVASCRIPT
+
       import "../stylesheets/application";
     JAVASCRIPT
   end
@@ -81,7 +82,7 @@ def setup_purgecss
     JAVASCRIPT
   end
 
-  insert_into_file 'postcss.config.js', after: 'plugins: [\n' do
+  insert_into_file 'postcss.config.js', after: "plugins: [\n" do
     <<~JAVASCRIPT
       ...process.env.NODE_ENV === 'production' ? [purgecss] : [],\n
     JAVASCRIPT
@@ -95,5 +96,5 @@ def setup_plugins
   setup_localtime
   setup_data_confirm_modal
   setup_noty
-  setup_uppy
+  # setup_uppy
 end

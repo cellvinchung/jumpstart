@@ -8,4 +8,6 @@ def setup_foreman
       sidekiq: sidekiq
     CODE
   end
+
+  run 'gem install foreman'
 end
