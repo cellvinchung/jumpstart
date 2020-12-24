@@ -15,5 +15,5 @@ end
 private
 
 def annotate_gems
-  gem 'annotate', '~> 3.1', group: %i[development]
+  gem 'annotate', '~> 3.1', '>= 3.1.1', group: %i[development]
 end

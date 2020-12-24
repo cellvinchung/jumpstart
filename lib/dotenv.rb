@@ -27,6 +27,9 @@ def setup_dotenv
         else
           echo "RVM project not found at: $PWD"
         fi
+
+        DATABASE_URL=''
+        REDIS_URL='redis://localhost:6379'
       CODE
     end
   end

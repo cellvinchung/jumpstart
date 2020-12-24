@@ -10,6 +10,10 @@ def setup_whenever
         require 'whenever/capistrano'
       RUBY
     end
+
+    append_file 'config/schedule.rb' do
+      set :chronic_options, hours24: true
+    end
   end
 end
 

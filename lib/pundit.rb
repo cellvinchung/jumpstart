@@ -7,9 +7,16 @@ def setup_pundit
     inject_into_class 'app/controllers/application_controller.rb', 'ApplicationController' do
       <<~RUBY
         include Pundit
+        rescue_from Pundit::NotAuthorizedError, with: :not_authorized
+
+        def not_authorized
+          flash[:error] = t('not_authorized')
+          redirect_back(fallback_location: root_path)
+        end
       RUBY
     end
     generate 'pundit:install'
+    application "config.action_dispatch.rescue_responses['Pundit::NotAuthorizedError'] = :forbidden"
   end
 end
 

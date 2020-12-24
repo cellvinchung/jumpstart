@@ -15,10 +15,9 @@ private
 
 def sidekiq_gems
   gem_group :production, :development do
-    gem 'sidekiq', '~> 6.0', '>= 6.0.5'
+    gem 'sidekiq', '~> 6.1', '>= 6.1.2'
     gem 'sidekiq-statistic', '~> 1.4'
     gem 'sidekiq-scheduler', '~> 3.0', '>= 3.0.1'
-    gem 'sidekiq-unique-jobs', '~> 6.0', '>= 6.0.18'
     gem 'sidekiq-status', '~> 1.1', '>= 1.1.4'
     gem 'activejob-traffic_control', '~> 0.1.3'
   end
@@ -27,8 +26,10 @@ end
 def custom_sidekiq
   initializer 'sidekiq.rb' do
     <<~RUBY
+      # remember to create service file on vm if needed
+      # https://github.com/mperham/sidekiq/wiki/Deployment
       redis_conn = proc {
-        Redis.new host: Rails.application.credentials.dig(Rails.env.to_sym, :redis, :host), port: Rails.application.credentials.dig(Rails.env.to_sym, :redis, :port)
+        Redis.new url: "#{ENV.fetch('REDIS_URL')}/2"
       }
       ActiveJob::TrafficControl.client = ConnectionPool.new(size: 5, timeout: 5, &redis_conn)
       Sidekiq.configure_client do |config|
@@ -47,6 +48,7 @@ def custom_routes
     <<~RUBY
       require 'sidekiq/web'
       require 'sidekiq-status/web'
+      require 'sidekiq-scheduler/web'
     RUBY
   end
   route "mount Sidekiq::Web => '/sidekiq'"
@@ -55,7 +57,7 @@ end
 def custom_yml
   add_file 'config/sidekiq.yml' do
     <<~YML
-      :concurrency: 2
+      :concurrency: 20
       :pidfile: tmp/pids/sidekiq-0.pid
       :logfile: log/sidekiq.log
       :queues:

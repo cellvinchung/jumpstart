@@ -15,7 +15,7 @@ end
 private
 
 def pagy_gems
-  gem 'pagy', '~> 3.7', '>= 3.7.3'
+  gem 'pagy', '~> 3.10'
 end
 
 def add_backend
@@ -39,7 +39,7 @@ def initializer_content
     # encoding: utf-8
     # frozen_string_literal: true
 
-    # Pagy initializer file (3.7.1)
+    # Pagy initializer file (3.10.0)
     # Customize only what you really need and notice that Pagy works also without any of the following lines.
     # Should you just cherry pick part of this file, please maintain the require-order of the extras
 
@@ -133,7 +133,7 @@ def initializer_content
     # require 'pagy/extras/shared'
     require 'pagy/extras/metadata'
     # For performance reason, you should explicitly set ONLY the metadata you use in the frontend
-    # Pagy::VARS[:metadata] = [:scaffold_url, :count, :page, :prev, :next, :last]    # example
+    Pagy::VARS[:metadata] = [:scaffold_url, :count, :page, :prev, :next, :last]    # example
 
     # Trim extra: Remove the page=1 param from links
     # See https://ddnexus.github.io/pagy/extras/trim
@@ -176,6 +176,8 @@ def initializer_content
     # Notice: No need to configure anything in this section if your app uses only "en"
     # or if you use the i18n extra below
     #
+    Pagy::I18n.load({locale: 'zh-TW'},
+                    {locale: 'en'})
     # Examples:
     # load the "de" built-in locale:
     # Pagy::I18n.load(locale: 'de')
@@ -185,8 +187,9 @@ def initializer_content
     #
     # load the "de", "en" and "es" built-in locales:
     # (the first passed :locale will be used also as the default_locale)
-    Pagy::I18n.load({locale: 'zh-TW'},
-                    {locale: 'en'})
+    # Pagy::I18n.load({locale: 'de'},
+    #                 {locale: 'en'},
+    #                 {locale: 'es'})
     #
     # load the "en" built-in locale, a custom "es" locale,
     # and a totally custom locale complete with a custom :pluralize proc:

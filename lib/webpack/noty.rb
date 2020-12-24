@@ -3,14 +3,13 @@
 def setup_noty
   custom_noty
 
-  append_file 'app/javascript/packs/application.js' do
+  append_file 'app/frontend/javascripts/index.js' do
     <<~JAVASCRIPT
-      import Noty from 'noty';
-      window.Noty = Noty;
+      import "./noty";
     JAVASCRIPT
   end
 
-  append_file 'app/javascript/stylesheets/application.scss' do
+  append_file 'app/frontend/stylesheets/application.scss' do
     <<~CSS
       @import "noty/src/noty";
       @import "noty/src/themes/bootstrap-v4.scss";
@@ -19,21 +18,26 @@ def setup_noty
 end
 
 def custom_noty
-  add_file 'app/javascript/custom/noty.js' do
+  add_file 'app/frontend/javascripts/noty.js' do
     <<~JAVASCRIPT
-    document.addEventListener("DOMContentLoaded", function() {
-      Noty.overrideDefaults({
-        theme: "bootstrap-v4",
-        timeout: 3000,
-        visibilityControl: true
-      });
-    });
-    JAVASCRIPT
-  end
+      import Noty from 'noty';
+      document.addEventListener("DOMContentLoaded", function() {
+        Noty.overrideDefaults({
+          theme: "bootstrap-v4",
+          timeout: 3000,
+          visibilityControl: true
+        });
 
-  append_file 'app/javascript/packs/custom.js' do
-    <<~JAVASCRIPT
-      import '../custom/noty';
+        if (gon.noty_message){
+          gon.noty_message.forEach((noty) => {
+            new Noty({
+              type: noty.type,
+              text: noty.text
+            }).show();
+          })
+        }
+      });
+      window.Noty = Noty;
     JAVASCRIPT
   end
 end

@@ -11,5 +11,5 @@ end
 private
 
 def loaf_gems
-  gem 'loaf', '~> 0.9.0'
+  gem 'loaf', '~> 0.10.0'
 end

@@ -21,8 +21,8 @@ private
 
 def rack_mini_profiler_gems
   gem_group :development do
-    gem 'rack-mini-profiler', '~> 1.1', '>= 1.1.6', require: false
-    gem 'memory_profiler', '~> 0.9.14'
+    gem 'rack-mini-profiler', '~> 2.2'
+    gem 'memory_profiler', '~> 1.0'
     gem 'flamegraph', '~> 0.9.5'
     gem 'stackprof', '~> 0.2.15'
     gem 'fast_stack', '~> 0.2.0'

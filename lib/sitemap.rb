@@ -9,11 +9,12 @@ def setup_sitemap
         require 'capistrano/sitemap_generator'
       RUBY
     end
+    rake 'sitemap:install'
   end
 end
 
 private
 
 def sitemap_gems
-  gem 'sitemap_generator', '~> 6.1', group: %i[development production], require: false
+  gem 'sitemap_generator', '~> 6.1', '>= 6.1.2', group: %i[development production], require: false
 end

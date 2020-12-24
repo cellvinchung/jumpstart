@@ -18,15 +18,14 @@ Initialize rails project with custom configuration. See [Rails Application Templ
 
 ### Application Settings
 
-- Use active storage
-- Use action text
 - Disable auto generated stylesheets & helpers
 - Time zone: Taipei
 - Add middleware `ActionDispatch::Static, Rack::Deflater` - [smaller rails page size](https://www.schneems.com/2017/11/08/80-smaller-rails-footprint-with-rack-deflate/)
-- Add hosts `lvh.me`
+- Add hosts `lvh.me` & `.ngrok.io`
 - require master_key
 - I18n
   - [i18n-active_record](https://github.com/svenfuchs/i18n-active_record) - Lookup translations in the database
+- Enable [webpack chunks](https://github.com/rails/webpacker/blob/master/docs/webpack.md#add-splitchunks-webpack-v4)
 - Locale
   - default: zh-TW
   - available: zh-TW, en
@@ -47,9 +46,7 @@ Initialize rails project with custom configuration. See [Rails Application Templ
 - [cacheflow](https://github.com/ankane/cacheflow) - Colorized logging for Memcached and Redis
 - [capistrano](https://github.com/capistrano/capistrano) - Deployment automation
   - [rvm1-capistrano3](https://github.com/rvm/rvm1-capistrano3)
-  - [capistrano-upload-config](https://github.com/rjocoleman/capistrano-upload-config) - Upload, initialize and maintain configuration files
   - [capistrano-passenger](https://github.com/capistrano/passenger)
-  - [capistrano-sidekiq](https://github.com/seuros/capistrano-sidekiq)
 - [rails-erd](https://github.com/voormedia/rails-erd) - Generate entity-relationship diagrams
 - Add `Procfile` for [foreman](https://github.com/ddollar/foreman). ([DON'T install foreman in projects!](https://github.com/ddollar/foreman/wiki/Don't-Bundle-Foreman))
 
@@ -57,13 +54,15 @@ Initialize rails project with custom configuration. See [Rails Application Templ
 
 - [webpacker](https://github.com/rails/webpacker)
   - [bootstrap](https://getbootstrap.com/)
-  - [data-confirm-modal](https://www.npmjs.com/package/data-confirm-modal)
   - [flatpicker](https://flatpickr.js.org/) - datepicker/datetimepicker
   - [font-awesome](https://fontawesome.com/icons?d=gallery&m=free)
-  - [local time](https://www.npmjs.com/package/local-time)
   - [noty](https://ned.im/noty) - notification
   - [i18njs](https://www.npmjs.com/package/i18njs)
   - [axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser
+  - [day.js](https://day.js.org/)
+  - [lodash](https://lodash.com/)
+  - [sweetalert2](https://sweetalert2.github.io/) - Override Rails data-confirm dialog
+  - [tippy](http://atomiks.github.io/tippyjs/) - Tooltip
 - [gon](https://github.com/gazay/gon) - Use rails variables in js
 - [inline_svg](https://github.com/jamesmartin/inline_svg) - Styling SVG documents with CSS
 
@@ -78,6 +77,7 @@ Initialize rails project with custom configuration. See [Rails Application Templ
 - [simple_form](https://github.com/heartcombo/simple_form) - Forms made easy for rails (initialized with bootstrap)
 - [sitemap_generator](https://github.com/kjvarga/sitemap_generator)
 - [meta-tags](https://github.com/kpumuk/meta-tags)
+- [local time](https://github.com/basecamp/local_time) - Display times and dates to users in their local time
 
 ### Background Job
 
@@ -85,7 +85,6 @@ Initialize rails project with custom configuration. See [Rails Application Templ
   - [activejob-traffic_control](https://github.com/nickelser/activejob-traffic_control) - Rate limiting/job enabling for ActiveJob using distributed locks
   - [sidekiq-statistic](https://github.com/davydovanton/sidekiq-statistic) - Improved display of statistics
   - [sidekiq-scheduler](https://github.com/moove-it/sidekiq-scheduler) - Scheduler for Sidekiq jobs
-  - [sidekiq-unique-jobs](https://github.com/mhenrixon/sidekiq-unique-jobs) - Ensure uniqueness of Sidekiq jobs
   - [sidekiq-status](https://github.com/utgarda/sidekiq-status) - An extension to Sidekiq message processing to track jobs
 
 ### Security
@@ -104,7 +103,7 @@ Initialize rails project with custom configuration. See [Rails Application Templ
 
 ### Tracking & Log Related
 
-- [audited](https://github.com/collectiveidea/audited) - Logs all changes to models
+- [paper_trail](https://github.com/paper-trail-gem/paper_trail) - Track changes to models
 - [lograge](https://github.com/roidrage/lograge) - Simplify rails' default request logging
 - [marginalia](https://github.com/basecamp/marginalia) - Attach comments to ActiveRecord queries
 - [notable](https://github.com/ankane/notable) - Tracks notable requests and background jobs and stores them in database
@@ -121,11 +120,13 @@ Initialize rails project with custom configuration. See [Rails Application Templ
 - [strip_attributes](https://github.com/rmm5t/strip_attributes) - Automatically strips leading and trailing whitespace
 - [browser](https://github.com/fnando/browser) - Browser detection
 - [aasm](https://github.com/aasm/aasm) - State machine
+  - [after_commit_everywhere](https://github.com/Envek/after_commit_everywhere) - Prevent race conditions and redundant callback calls within nested transaction
 - [http](https://github.com/httprb/http) - Ruby HTTP client
 - [active_hash](https://github.com/zilkey/active_hash) - Use a ruby hash as a readonly datasource for an ActiveRecord-like model
-- [decent_exposure](https://github.com/hashrocket/decent_exposure) - Creating declarative interfaces in controllers
 - [activerecord-import](https://github.com/zdennis/activerecord-import) - Bulk inserting data using ActiveRecord
 - [groupdate](https://github.com/ankane/groupdate) - Group time data
+- [deep_cloneable](https://github.com/moiristo/deep_cloneable) - Clone including associations
+- [rollout](https://github.com/FetLife/rollout) - Feature flags
 
 ### Optional
 
@@ -135,6 +136,5 @@ Initialize rails project with custom configuration. See [Rails Application Templ
   - [omniauth-facebook](https://github.com/simi/omniauth-facebook)
   - [omniauth-twitter](https://github.com/arunagw/omniauth-twitter)
   - [omniauth-line](https://github.com/chrislintw/omniauth-line)
-- [cloudflare-rails](https://github.com/modosc/cloudflare-rails) - Fix `request.ip` and `request.remote_ip` in rails when using Cloudflare
 - [rollbar](https://rollbar.com/) - Error Tracking
 - [pghero](https://github.com/ankane/pghero) - Performance dashboard for postgres

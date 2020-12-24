@@ -13,7 +13,7 @@ def setup_devise
     generate 'devise:i18n:locale zh-TW'
     generate 'devise', devise_model.capitalize
     # generate "devise:i18n:views #{devise_model.capitalize}"
-    set_omniauth
+    set_omniauth(devise_model.downcase)
   end
 
   setup_pundit
@@ -30,14 +30,14 @@ def devise_gems
   gem 'omniauth-line', git: 'git@github.com:chrislintw/omniauth-line.git'
 end
 
-def set_omniauth
-  insert_into_file 'app/models/user.rb', after: ":validatable" do
+def set_omniauth(devise_model)
+  insert_into_file "app/models/#{devise_model}.rb", after: ":validatable" do
     <<~RUBY
       , :omniauthable, omniauth_providers: [:google, :facebook, :twitter, :line]
       has_many :oauth_providers, dependent: :destroy
     RUBY
   end
-  generate 'model oauth_provider user:references provider:string uid:string:index expires_at:datetime access_token:string access_token_secret:string refresh_token:string auth:text'
+  generate "model oauth_provider #{devise_model}:references provider:string uid:string:index expires_at:datetime access_token:string access_token_secret:string refresh_token:string auth:text"
   inject_into_class 'app/models/oauth_provider.rb', 'OauthProvider' do
     <<~RUBY
       validates :uid, :provider, presence: true

@@ -13,7 +13,7 @@ end
 private
 
 def meta_tag_gems
-  gem 'meta-tags', '~> 2.13'
+  gem 'meta-tags', '~> 2.14'
 end
 
 def custom_layout

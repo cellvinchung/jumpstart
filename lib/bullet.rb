@@ -18,5 +18,5 @@ end
 private
 
 def bullet_gems
-  gem 'bullet', '~> 6.1', group: %i[development]
+  gem 'bullet', '~> 6.1', '>= 6.1.2', group: %i[development]
 end

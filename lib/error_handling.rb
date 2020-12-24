@@ -9,6 +9,7 @@ def setup_error_handling
 
         def record_not_found
           render template: "errors/not_found", status: :not_found
+          #TODO: set error page, demo at jumpstart/errors
         end
       RUBY
     end

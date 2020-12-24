@@ -2,12 +2,12 @@
 
 def setup_fontawesome
   custom_fontawesome
-  append_file 'app/javascript/packs/application.js' do
+  append_file 'app/frontend/javascripts/index.js' do
     <<~JAVASCRIPT
-      import '@fortawesome/fontawesome-free/js/all'
+      import "./fontawesome";
     JAVASCRIPT
   end
-  append_file 'app/javascript/stylesheets/application.scss' do
+  append_file 'app/frontend/stylesheets/application.scss' do
     <<~CSS
       @import "@fortawesome/fontawesome-free";
     CSS
@@ -15,11 +15,7 @@ def setup_fontawesome
 end
 
 def custom_fontawesome
-  add_file 'app/javascript/custom/fontawesome.js'
-
-  append_file 'app/javascript/packs/custom.js' do
-    <<~JAVASCRIPT
-      import '../custom/fontawesome';
-    JAVASCRIPT
+  file 'app/frontend/javascripts/fontawesome.js' do
+    import '@fortawesome/fontawesome-free/js/all'
   end
 end

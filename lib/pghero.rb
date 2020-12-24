@@ -16,6 +16,6 @@ end
 private
 
 def pghero_gems
-  gem 'pghero', '~> 2.4', '>= 2.4.1'
+  gem 'pghero', '~> 2.7', '>= 2.7.3'
   gem 'pg_query', '~> 1.2'
 end

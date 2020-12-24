@@ -3,13 +3,13 @@
 def setup_bootstrap
   custom_bootstrap
 
-  append_file 'app/javascript/packs/application.js' do
+  append_file 'app/frontend/javascripts/index.js' do
     <<~JAVASCRIPT
-      import "bootstrap";
+      import "./bootstrap";
     JAVASCRIPT
   end
 
-  append_file 'app/javascript/stylesheets/application.scss' do
+  append_file 'app/frontend/stylesheets/application.scss' do
     <<~CSS
       @import "bootstrap";
     CSS
@@ -17,18 +17,9 @@ def setup_bootstrap
 end
 
 def custom_bootstrap
-  add_file 'app/javascript/custom/bootstrap.js' do
+  file 'app/frontend/javascripts/bootstrap.js' do
     <<~JAVASCRIPT
-      document.addEventListener("DOMContentLoaded", function() {
-        $('[data-toggle="popover"]').popover();
-        $('[data-toggle="tooltip"]').tooltip();
-      });
-    JAVASCRIPT
-  end
-
-  append_file 'app/javascript/packs/custom.js' do
-    <<~JAVASCRIPT
-      import '../custom/bootstrap';
+      import "bootstrap";
     JAVASCRIPT
   end
 end

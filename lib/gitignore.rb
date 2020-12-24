@@ -8,11 +8,10 @@ def update_gitignore
       config/storage.yml
       config/*.json
       .env
-      # Ignore application configuration
-      config/gcs.json
 
       # deploy
       config/deploy/*.rb
+      config/deploy/templates/*
 
       # db schema.rb
       db/schema.rb

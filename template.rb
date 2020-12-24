@@ -23,49 +23,49 @@ def add_common_gems
   gem_group :production, :development do
     gem 'active_link_to', '~> 1.0', '>= 1.0.5'
     gem 'ruby-progressbar', '~> 1.10', '>= 1.10.1', require: false
+    gem 'local_time', '~> 2.1'
   end
 
-  gem 'image_processing', '~> 1.10', '>= 1.10.3'
+  gem 'image_processing', '~> 1.12', '>= 1.12.1'
   gem 'discard', '~> 1.2'
 
-  gem 'oj', '~> 3.10', '>= 3.10.3'
+  gem 'oj', '~> 3.10', '>= 3.10.17'
 
   # 移除欄位空白
-  gem 'strip_attributes', '~> 1.9', '>= 1.9.2'
+  gem 'strip_attributes', '~> 1.11'
 
-  gem 'browser', '~> 4.0'
+  gem 'browser', '~> 5.2'
 
   # 狀態機
-  gem 'aasm', '~> 5.0', '>= 5.0.6'
+  gem 'aasm', '~> 5.1', '>= 5.1.1'
+  # prevent race conditions and redundant callback calls within nested transaction
+  gem 'after_commit_everywhere', '~> 0.1.5'
 
-  gem 'http', '~> 4.3'
+  gem 'http', '~> 4.4', '>= 4.4.1'
 
   gem 'active_hash', '~> 3.1'
-  gem 'decent_exposure', '3.0.2'
 
   # bulk insert
-  gem 'activerecord-import', '~> 1.0', '>= 1.0.4'
+  gem 'activerecord-import', '~> 1.0', '>= 1.0.7'
 
-  gem 'inline_svg', '~> 1.7'
+  gem 'inline_svg', '~> 1.7', '>= 1.7.2'
 
-  gem 'counter_culture', '~> 2.0'
+  gem 'counter_culture', '~> 2.7'
 
   # do conditions based on the associations of your records
   gem 'activerecord_where_assoc', '~> 1.1'
 
-  gem 'rack-attack', '~> 6.2', '>= 6.2.2'
+  gem 'rack-attack', '~> 6.3', '>= 6.3.1'
 
-  gem 'groupdate', '~> 5.0', require: false
-end
+  gem 'groupdate', '~> 5.2', '>= 5.2.1', require: false
 
-def setup_action_text
-  rails_command 'action_text:install'
+  gem 'deep_cloneable', '~> 3.0'
 end
 
 def finalize_setting
   after_bundle do
     rails_command 'db:migrate'
-
+    setup_paper_trail
     run 'gem install rubocop-rails'
     run 'gem install solargraph'
   end
@@ -73,10 +73,8 @@ end
 
 require_relative "lib/annotate"
 require_relative "lib/application"
-require_relative "lib/audited"
 require_relative "lib/bullet"
 require_relative "lib/capistrano"
-require_relative "lib/cloudflare"
 require_relative "lib/devise"
 require_relative "lib/draper"
 require_relative "lib/dotenv"
@@ -95,11 +93,13 @@ require_relative "lib/marginalia"
 require_relative "lib/meta_tag"
 require_relative "lib/notable"
 require_relative "lib/pagy"
+require_relative "lib/paper_trail"
 require_relative "lib/pghero"
 require_relative "lib/premailer_rails"
 require_relative "lib/pry_rails"
 require_relative "lib/rack_mini_profiler"
 require_relative "lib/rollbar"
+require_relative "lib/rollout"
 require_relative "lib/sidekiq"
 require_relative "lib/simple_form"
 require_relative "lib/sitemap"
@@ -111,7 +111,6 @@ add_common_gems
 after_bundle do
   rails_command 'db:create'
   run 'spring stop'
-  setup_action_text
 end
 
 update_application
@@ -127,7 +126,6 @@ setup_pagy
 setup_loaf
 setup_draper
 setup_friendly_id
-setup_audited
 setup_sidekiq
 setup_pghero
 setup_marginalia
@@ -138,6 +136,7 @@ setup_premailer
 setup_dotenv
 setup_rack_mini_profiler
 setup_rollbar
+setup_rollout
 setup_lockbox
 setup_whenever
 setup_sitemap
@@ -146,7 +145,8 @@ setup_pry_rails
 setup_notable
 setup_lograge
 update_gitignore
-setup_cloudflare
 setup_error_handling
 setup_foreman
 finalize_setting
+
+puts 'Change paper trail object data type then run migration'

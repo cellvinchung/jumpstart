@@ -2,13 +2,12 @@
 
 def setup_flatpickr
   custom_flatpickr
-  append_file 'app/javascript/packs/application.js' do
+  append_file 'app/frontend/javascripts/index.js' do
     <<~JAVASCRIPT
-      import flatpickr from 'flatpickr'
-      import "flatpickr/dist/l10n/zh-tw"
+      import "./flatpickr";
     JAVASCRIPT
   end
-  append_file 'app/javascript/stylesheets/application.scss' do
+  append_file 'app/frontend/stylesheets/application.scss' do
     <<~CSS
       @import "flatpickr/dist/flatpickr.min";
     CSS
@@ -16,8 +15,10 @@ def setup_flatpickr
 end
 
 def custom_flatpickr
-  add_file 'app/javascript/custom/flatpickr.js' do
+  file 'app/frontend/javascripts/flatpickr.js' do
     <<~JAVASCRIPT
+      import flatpickr from 'flatpickr'
+      import "flatpickr/dist/l10n/zh-tw"
       document.addEventListener('DOMContentLoaded', function(){
         flatpickr.localize(flatpickr.l10ns.zh_tw);
         flatpickr(".datepicker", {
@@ -27,11 +28,6 @@ def custom_flatpickr
           time_24hr: true
         })
       })
-    JAVASCRIPT
-  end
-  append_file 'app/javascript/packs/custom.js' do
-    <<~JAVASCRIPT
-      import '../custom/flatpickr';
     JAVASCRIPT
   end
 end
