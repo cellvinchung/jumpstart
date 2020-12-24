@@ -16,6 +16,8 @@ end
 
 def custom_fontawesome
   file 'app/frontend/javascripts/fontawesome.js' do
-    import '@fortawesome/fontawesome-free/js/all'
+    <<~JAVASCRIPT
+      import '@fortawesome/fontawesome-free/js/all'
+    JAVASCRIPT
   end
 end

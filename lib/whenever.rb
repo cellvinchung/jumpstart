@@ -12,7 +12,9 @@ def setup_whenever
     end
 
     append_file 'config/schedule.rb' do
-      set :chronic_options, hours24: true
+      <<~RUBY
+        set :chronic_options, hours24: true
+      RUBY
     end
   end
 end

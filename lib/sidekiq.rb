@@ -29,7 +29,7 @@ def custom_sidekiq
       # remember to create service file on vm if needed
       # https://github.com/mperham/sidekiq/wiki/Deployment
       redis_conn = proc {
-        Redis.new url: "#{ENV.fetch('REDIS_URL')}/2"
+        Redis.new url: "#{ENV.fetch('REDIS_URL') {'redis://localhost:6379'}}/2"
       }
       ActiveJob::TrafficControl.client = ConnectionPool.new(size: 5, timeout: 5, &redis_conn)
       Sidekiq.configure_client do |config|

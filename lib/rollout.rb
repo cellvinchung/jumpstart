@@ -3,7 +3,7 @@ def setup_rollout
   after_bundle do
     initializer 'rollout.rb' do
       <<~RUBY
-        redis = Redis.new(url: "#{ENV.fetch('REDIS_URL')}/1")
+        redis = Redis.new(url: "#{ENV.fetch('REDIS_URL') {'redis://localhost:6379'}}/1")
         $rollout = Rollout.new(redis)
       RUBY
     end

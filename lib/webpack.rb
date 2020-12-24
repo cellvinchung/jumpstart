@@ -27,7 +27,10 @@ end
 private
 
 def create_stylesheet
-  file 'app/frontend/stylesheets/custom.scss'
+  file 'app/frontend/stylesheets/custom.scss' do
+    <<~CSS
+    CSS
+  end
   file 'app/frontend/stylesheets/application.scss' do
     <<~CSS
       @import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC:400,500,700,900&display=swap");
@@ -64,12 +67,12 @@ def custom_webpack_env
     JAVASCRIPT
   end
 
-  gsub_file 'config/webpack.yml', 'app/javascripts', 'app/frontend'
+  gsub_file 'config/webpacker.yml', 'app/javascript', 'app/frontend'
 end
 
 def custom_application_pack
-  run 'mv app/javacript app/frontend'
-  run 'mkdir app/images'
+  run 'mv app/javascript app/frontend'
+  run 'mkdir app/frontend/images'
 
   file 'app/frontend/javascripts/index.js' do
     <<~JAVASCRIPT

@@ -60,7 +60,6 @@ def set_config
     <<~RUBY
       set :conditionally_migrate, true
 
-      SSHKit.config.command_map[:sidekiq] = "bundle exec sidekiq -e #{fetch(:stage)}"
       set :sidekiq_roles, :app
       set :init_system, :systemd
       set :sidekiq_service_unit_name, "sidekiq.service"

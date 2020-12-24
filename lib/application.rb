@@ -36,7 +36,7 @@ def set_production
   environment(env: 'production') do
     config.exceptions_app = routes
     config.action_mailer.default_url_options = { host: ENV['DOMAIN'], port: ENV['PORT'] }
-    config.cache_store = :redis_cache_store, { url: "#{ENV.fetch('REDIS_URL')}/0" }
+    config.cache_store = :redis_cache_store, { url: "#{ENV.fetch('REDIS_URL') {'redis://localhost:6379'}}/0" }
   end
   uncomment_lines 'config/environments/production.rb', /require_master_key/
   uncomment_lines 'config/environments/production.rb', "config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' "

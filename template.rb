@@ -60,6 +60,8 @@ def add_common_gems
   gem 'groupdate', '~> 5.2', '>= 5.2.1', require: false
 
   gem 'deep_cloneable', '~> 3.0'
+
+  gem 'paper_trail', '~> 11.1'
 end
 
 def finalize_setting
