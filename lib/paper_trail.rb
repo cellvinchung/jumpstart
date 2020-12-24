@@ -1,6 +1,6 @@
 def setup_paper_trail
   generate 'paper_trail:install [--with-changes]'
-  file 'app/model/version.rb' do
+  file 'app/models/version.rb' do
     <<~RUBY
       class Version < ::PaperTrail::Version
       end
