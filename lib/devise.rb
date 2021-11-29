@@ -11,9 +11,13 @@ def setup_devise
   after_bundle do
     generate 'devise:install'
     generate 'devise:i18n:locale zh-TW'
-    generate 'devise', devise_model.capitalize
-    # generate "devise:i18n:views #{devise_model.capitalize}"
+    generate 'devise:i18n:locale en'
+    generate 'devise', devise_model
+    generate "devise:i18n:views #{devise_model}"
     set_omniauth(devise_model.downcase)
+
+    gsub_file 'config/initializers/devise.rb', 'DeviseController',  'ApplicationController'
+    uncomment_lines 'config/initializers/devise.rb', /parent_controller/
   end
 
   setup_pundit
@@ -22,12 +26,11 @@ end
 private
 
 def devise_gems
-  gem 'devise', '~> 4.7', '>= 4.7.0'
-  gem 'devise-i18n', '~> 1.9'
-  gem 'omniauth-google-oauth2', '~> 0.8.0'
-  gem 'omniauth-facebook', '~> 6.0'
+  gem 'devise', '~> 4.8'
+  gem 'devise-i18n', '~> 1.10', '>= 1.10.1'
+  gem 'omniauth-google-oauth2', '~> 1.0'
+  gem 'omniauth-facebook', '~> 9.0'
   gem 'omniauth-twitter', '~> 1.4'
-  gem 'omniauth-line', git: 'git@github.com:chrislintw/omniauth-line.git'
 end
 
 def set_omniauth(devise_model)
@@ -50,16 +53,14 @@ end
 def devise_omniauth
   insert_into_file 'config/initializers/devise.rb', after: "# ==> OmniAuth\n" do
     <<~RUBY
-      config.omniauth :google_oauth2, Rails.application.credentials.dig(Rails.env.to_sym, :google, :client_id), Rails.application.credentials.dig(Rails.env.to_sym, :google, :client_secret), {
+      config.omniauth :google_oauth2, Rails.application.credentials.dig(:google, :client_id), Rails.application.credentials.dig(:google, :client_secret), {
         name: 'google'
       }
-      config.omniauth :facebook, Rails.application.credentials.dig(Rails.env.to_sym, :facebook, :app_id), Rails.application.credentials.dig(Rails.env.to_sym, :facebook, :secret),{
+      config.omniauth :facebook, Rails.application.credentials.dig(:facebook, :app_id), Rails.application.credentials.dig(:facebook, :secret),{
         secure_image_url: true
       }
-      config.omniauth :twitter, Rails.application.credentials.dig(Rails.env.to_sym, :twitter, :api_key), Rails.application.credentials.dig(Rails.env.to_sym, :twitter, :api_secret), {
+      config.omniauth :twitter, Rails.application.credentials.dig(:twitter, :api_key), Rails.application.credentials.dig(:twitter, :api_secret), {
         secure_image_url: true
-      }
-      config.omniauth :line, Rails.application.credentials.dig(Rails.env.to_sym, :line, :channel_id), Rails.application.credentials.dig(Rails.env.to_sym, :line, :channel_secret), {
       }
     RUBY
   end

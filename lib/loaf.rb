@@ -4,7 +4,13 @@ def setup_loaf
   loaf_gems
 
   after_bundle do
-    generate 'loaf:install'
+    initializer 'loaf.rb' do
+      <<~RUBY
+        Loaf.configure do |config|
+          config.match = :exclusive
+        end
+      RUBY
+    end
   end
 end
 

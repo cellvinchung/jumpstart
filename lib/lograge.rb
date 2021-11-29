@@ -30,11 +30,11 @@ end
 def add_payload
   inject_into_class 'app/controllers/application_controller.rb', 'ApplicationController' do
     <<-RUBY
-        def append_info_to_payload(payload)
-          super
-          payload[:request_id] = request.uuid
-          payload[:user_id] = current_user.id if current_user
-        end
+      def append_info_to_payload(payload)
+        super
+        payload[:request_id] = request.uuid
+        payload[:user_id] = current_user.id if current_user
+      end
     RUBY
   end
 end

@@ -22,23 +22,25 @@ def update_application
 end
 
 def set_development
-  environment(env: 'development') do
-    <<~RUBY
-      config.hosts << "lvh.me"
-      config.hosts << '.ngrok.io'
-      config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
-      routes.default_url_options[:host] = 'lvh.me:3000'
-    RUBY
-  end
+  content = <<~RUBY
+    config.hosts << "lvh.me"
+    config.hosts << '.ngrok.io'
+    config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
+    routes.default_url_options[:host] = 'lvh.me:3000'
+  RUBY
+
+  environment "#{content}\n", env: 'development'
 end
 
 def set_production
-  environment(env: 'production') do
+  content = <<~RUBY
     config.exceptions_app = routes
     config.action_mailer.default_url_options = { host: ENV['DOMAIN'], port: ENV['PORT'] }
-    config.cache_store = :redis_cache_store, { url: "#{ENV.fetch('REDIS_URL') {'redis://localhost:6379'}}/0" }
-  end
+    config.cache_store = :redis_cache_store, { url: "#{ENV.fetch('REDIS_URL') { 'redis://localhost:6379' }}/0" }
+  RUBY
+
+  environment "#{content}\n", env: 'production'
+
   uncomment_lines 'config/environments/production.rb', /require_master_key/
   uncomment_lines 'config/environments/production.rb', "config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' "
-
 end

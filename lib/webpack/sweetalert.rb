@@ -1,12 +1,12 @@
 def setup_sweetalert
   custom_sweetalert
-  append_file 'app/frontend/javascripts/index.js' do
+  append_file 'app/frontend/javascripts/libs.js' do
     <<~JAVASCRIPT
-      import "./sweetalert";
+      import "libs/sweetalert";
     JAVASCRIPT
   end
 
-  append_file 'app/frontend/stylesheets/application.scss' do
+  append_file 'app/frontend/stylesheets/libs.scss' do
     <<~CSS
       @import '~@sweetalert2/theme-bootstrap-4/bootstrap-4.scss';
     CSS
@@ -14,7 +14,7 @@ def setup_sweetalert
 end
 
 def custom_sweetalert
-  file 'app/frontend/javascripts/sweetalert.js' do
+  file 'app/frontend/libs/sweetalert.js' do
     <<~JAVASCRIPT
       // https://diserve-it.com/post/using-sweet-alert-as-confirm-in-ruby-on-rails-6
       import Swal from "sweetalert2";
@@ -31,7 +31,7 @@ def custom_sweetalert
             Rails.ajax({
               type: element.getAttribute("data-method") || "GET",
               url: element.getAttribute("href"),
-              success: function(result) {
+              success: (result) => {
                 Swal.fire("Success!", result.message || "", "success").then(
                   (_result) => {
                     if (reloadAfterSuccess) {
@@ -40,7 +40,7 @@ def custom_sweetalert
                   }
                 );
               },
-              error: function(xhr) {
+              error: (xhr) => {
                 let title = I18n.t('error');
                 let message = "Something went wrong. Please try again later.";
 
@@ -84,7 +84,7 @@ def custom_sweetalert
           return false;
       };
 
-      function handleConfirm(element) {
+      const handleConfirm = (element) => {
           if (!allowAction(this)) {
               Rails.stopEverything(element);
           }

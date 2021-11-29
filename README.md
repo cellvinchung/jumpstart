@@ -14,6 +14,8 @@ Initialize rails project with custom configuration. See [Rails Application Templ
 
 3. add/move keys to credentials or .env file
 
+4. reorder gems in Gemfile for [better practice](https://docs.rubocop.org/rubocop/1.23/cops_bundler.html#bundlerorderedgems)
+
 ## Content(WIP)
 
 ### Application Settings
@@ -45,7 +47,6 @@ Initialize rails project with custom configuration. See [Rails Application Templ
 - [better_errors](https://github.com/BetterErrors/better_errors) - Better error page
 - [cacheflow](https://github.com/ankane/cacheflow) - Colorized logging for Memcached and Redis
 - [capistrano](https://github.com/capistrano/capistrano) - Deployment automation
-  - [rvm1-capistrano3](https://github.com/rvm/rvm1-capistrano3)
   - [capistrano-passenger](https://github.com/capistrano/passenger)
 - [rails-erd](https://github.com/voormedia/rails-erd) - Generate entity-relationship diagrams
 - Add `Procfile` for [foreman](https://github.com/ddollar/foreman). ([DON'T install foreman in projects!](https://github.com/ddollar/foreman/wiki/Don't-Bundle-Foreman))
@@ -56,7 +57,7 @@ Initialize rails project with custom configuration. See [Rails Application Templ
   - [bootstrap](https://getbootstrap.com/)
   - [flatpicker](https://flatpickr.js.org/) - datepicker/datetimepicker
   - [font-awesome](https://fontawesome.com/icons?d=gallery&m=free)
-  - [noty](https://ned.im/noty) - notification
+  - [toastr](https://github.com/CodeSeven/toastr) - notification
   - [i18njs](https://www.npmjs.com/package/i18njs)
   - [axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser
   - [day.js](https://day.js.org/)
@@ -86,6 +87,7 @@ Initialize rails project with custom configuration. See [Rails Application Templ
   - [sidekiq-statistic](https://github.com/davydovanton/sidekiq-statistic) - Improved display of statistics
   - [sidekiq-scheduler](https://github.com/moove-it/sidekiq-scheduler) - Scheduler for Sidekiq jobs
   - [sidekiq-status](https://github.com/utgarda/sidekiq-status) - An extension to Sidekiq message processing to track jobs
+  - [sidekiq-failures](https://github.com/mhfs/sidekiq-failures) - Keeps track of Sidekiq failed jobs and adds a tab to the Web UI to let you browse them
 
 ### Security
 
@@ -106,7 +108,6 @@ Initialize rails project with custom configuration. See [Rails Application Templ
 - [paper_trail](https://github.com/paper-trail-gem/paper_trail) - Track changes to models
 - [lograge](https://github.com/roidrage/lograge) - Simplify rails' default request logging
 - [marginalia](https://github.com/basecamp/marginalia) - Attach comments to ActiveRecord queries
-- [notable](https://github.com/ankane/notable) - Tracks notable requests and background jobs and stores them in database
 
 ### Test
 
@@ -122,11 +123,10 @@ Initialize rails project with custom configuration. See [Rails Application Templ
 - [aasm](https://github.com/aasm/aasm) - State machine
   - [after_commit_everywhere](https://github.com/Envek/after_commit_everywhere) - Prevent race conditions and redundant callback calls within nested transaction
 - [http](https://github.com/httprb/http) - Ruby HTTP client
-- [active_hash](https://github.com/zilkey/active_hash) - Use a ruby hash as a readonly datasource for an ActiveRecord-like model
 - [activerecord-import](https://github.com/zdennis/activerecord-import) - Bulk inserting data using ActiveRecord
 - [groupdate](https://github.com/ankane/groupdate) - Group time data
 - [deep_cloneable](https://github.com/moiristo/deep_cloneable) - Clone including associations
-- [rollout](https://github.com/FetLife/rollout) - Feature flags
+- [flipper](https://github.com/jnunemaker/flipper) - Feature flags
 
 ### Optional
 
@@ -135,6 +135,3 @@ Initialize rails project with custom configuration. See [Rails Application Templ
   - [omniauth-google-oauth2](https://github.com/zquestz/omniauth-google-oauth2)
   - [omniauth-facebook](https://github.com/simi/omniauth-facebook)
   - [omniauth-twitter](https://github.com/arunagw/omniauth-twitter)
-  - [omniauth-line](https://github.com/chrislintw/omniauth-line)
-- [rollbar](https://rollbar.com/) - Error Tracking
-- [pghero](https://github.com/ankane/pghero) - Performance dashboard for postgres

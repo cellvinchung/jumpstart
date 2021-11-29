@@ -8,17 +8,17 @@ def setup_draper
 
     inject_into_class 'app/decorators/application_decorator.rb', 'ApplicationDecorator' do
       <<-RUBY
-        include Draper::LazyHelpers
-        include ActionView::Helpers::UrlHelper
-        include Rails.application.routes.url_helpers
+      include Draper::LazyHelpers
+      include ActionView::Helpers::UrlHelper
+      include Rails.application.routes.url_helpers
 
-        def created_at
-          object.created_at.strftime('%F %R')
-        end
+      def created_at
+        object.created_at.strftime('%F %R')
+      end
 
-        def updated_at
-          object.updated_at.strftime('%F %R')
-        end
+      def updated_at
+        object.updated_at.strftime('%F %R')
+      end
       RUBY
     end
   end
@@ -27,5 +27,5 @@ end
 private
 
 def draper_gems
-  gem 'draper', '~> 4.0', '>= 4.0.1'
+  gem 'draper', '~> 4.0', '>= 4.0.2'
 end

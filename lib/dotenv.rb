@@ -30,6 +30,8 @@ def setup_dotenv
 
         # DATABASE_URL=''
         REDIS_URL='redis://localhost:6379'
+
+        KMS_KEY_ID=''
       CODE
     end
   end
@@ -38,5 +40,5 @@ end
 private
 
 def dotenv_gems
-  gem 'dotenv-rails', '~> 2.7', '>= 2.7.5', group: %i[development test]
+  gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 end

@@ -22,5 +22,5 @@ end
 private
 
 def whenever_gems
-  gem 'whenever', '~> 1.0', require: false, group: %i[development production]
+  gem 'whenever', '~> 1.0', require: false, group: %i[development production staging]
 end

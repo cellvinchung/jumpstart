@@ -4,14 +4,18 @@ def setup_i18n
   i18n_gems
 
   after_bundle do
-    generate 'model I18nTranslation locale:string:index key:string:index value:text interpolations:text is_proc:boolean'
-    generate 'i18n:js:config'
     initializer 'i18n_active_record.rb' do
-      initializer_content
+      initializer_i18n_content
     end
     application do
       <<~RUBY
         config.middleware.use I18n::JS::Middleware
+      RUBY
+    end
+
+    append_file 'Rakefile' do
+      <<~RUBY
+        require 'i18n-spec/tasks'
       RUBY
     end
 
@@ -21,24 +25,12 @@ end
 
 private
 
-def initializer_content
+def initializer_i18n_content
   <<~RUBY
     require 'i18n/backend/active_record'
-
-    Translation  = I18n::Backend::ActiveRecord::Translation
-
-    if Translation.table_exists?
-      I18n.backend = I18n::Backend::ActiveRecord.new
-
-      I18n::Backend::ActiveRecord.send(:include, I18n::Backend::Memoize)
-      I18n::Backend::Simple.send(:include, I18n::Backend::Memoize)
-      I18n::Backend::Simple.send(:include, I18n::Backend::Pluralization)
-
-      I18n.backend = I18n::Backend::Chain.new(I18n::Backend::Simple.new, I18n.backend)
-    end
-
     I18n::Backend::ActiveRecord.configure do |config|
       config.cleanup_with_destroy = true # defaults to false
+      config.cache_translations = true # defaults to false
     end
   RUBY
 end
@@ -54,12 +46,17 @@ def locale_content
       destroy: '刪除'
       edit: '編輯'
       error: '發生錯誤'
+      internal_server_error: '伺服器錯誤'
       login: '登入'
       logout: '登出'
       new: '新增'
+      not_authorized: '沒有權限'
+      not_found: '頁面不存在'
+      service_unavailable: '連線逾時'
       show: '檢視'
       submit: '送出'
       updated_at: '更新時間'
+      unprocessable_entity: '存取被拒'
       true: '是'
       false: '否'
     YML
@@ -79,7 +76,7 @@ def locale_content
         models:
           version: '版本紀錄'
       simple_form:
-        labels:
+        options:
           version:
             event:
               create: '建立'
@@ -91,6 +88,9 @@ end
 
 def i18n_gems
   gem 'rails-i18n', '~> 6.0'
-  gem 'i18n-js', '~> 3.8'
-  gem 'i18n-active_record', '~> 0.4.0', require: 'i18n/active_record'
+  gem 'i18n-js', '~> 3.9'
+  gem 'i18n-active_record', '~> 1.0', '>= 1.0.1'
+  gem_group :development, :test do
+    gem 'i18n-spec', github: 'tigrish/i18n-spec'
+  end
 end

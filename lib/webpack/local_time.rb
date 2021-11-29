@@ -2,15 +2,15 @@
 
 def setup_localtime
   custom_localtime
-  append_file 'app/frontend/javascripts/index.js' do
+  append_file 'app/frontend/javascripts/libs.js' do
     <<~JAVASCRIPT
-      import "./localtime";
+      import "libs/localtime";
     JAVASCRIPT
   end
 end
 
 def custom_localtime
-  file 'app/frontend/javascripts/localtime.js' do
+  file 'app/frontend/libs/localtime.js' do
     <<~JAVASCRIPT
       import LocalTime from "local-time"
       LocalTime.start()

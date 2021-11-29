@@ -12,13 +12,11 @@ end
 private
 
 def pry_gems
-  gem_group :production, :development do
+  gem_group :production, :development, :staging do
     gem 'pry-rails', '~> 0.3.9'
-    gem 'hirb', '~> 0.7.3'
-    gem 'hirb-unicode-steakknife', '~> 0.0.9'
     gem 'pry-byebug', '~> 3.9'
-    gem 'pry-stack_explorer', '~> 0.5.1'
-    gem 'amazing_print', '~> 1.2', '>= 1.2.2', require: false
+    gem 'pry-stack_explorer', '~> 0.6.1'
+    gem 'amazing_print', '~> 1.4', require: false
   end
 end
 

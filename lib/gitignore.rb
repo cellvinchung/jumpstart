@@ -7,7 +7,7 @@ def update_gitignore
       config/database.yml
       config/storage.yml
       config/*.json
-      .env
+      .env*
 
       # deploy
       config/deploy/*.rb
