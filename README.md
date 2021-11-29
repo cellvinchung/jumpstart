@@ -57,7 +57,7 @@ Initialize rails project with custom configuration. See [Rails Application Templ
   - [bootstrap](https://getbootstrap.com/)
   - [flatpicker](https://flatpickr.js.org/) - datepicker/datetimepicker
   - [font-awesome](https://fontawesome.com/icons?d=gallery&m=free)
-  - [toastr](https://github.com/CodeSeven/toastr) - notification
+  - [pnotify](https://github.com/sciactive/pnotify) - notification
   - [i18njs](https://www.npmjs.com/package/i18njs)
   - [axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser
   - [day.js](https://day.js.org/)
